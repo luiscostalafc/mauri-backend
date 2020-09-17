@@ -1,6 +1,6 @@
 import Factory from '@ioc:Adonis/Lucid/Factory'
 import Synonym from 'App/Models/Synonym'
-import { randomProductId } from './ProductFactoryFactory'
+import { randomProductId } from './ProductFactory'
 
 export const SynonymFactory = Factory
   .define(Synonym, async ({ faker }) => ({

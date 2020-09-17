@@ -1,8 +1,10 @@
 import Factory from '@ioc:Adonis/Lucid/Factory'
 import Card from 'App/Models/Card'
+import { randomUserId } from './UserFactory'
 
 export const CardFactory = Factory
-  .define(Card, ({ faker }) => ({
+  .define(Card, async ({ faker }) => ({
+    user_id: await randomUserId(),
     card_number: faker.finance.mask(10),
     brand: faker.random.arrayElement(['visa', 'mastercard']),
     cvv: String(faker.random.number(999)),

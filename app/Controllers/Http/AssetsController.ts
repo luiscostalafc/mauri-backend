@@ -34,7 +34,7 @@ export default class AssetsController {
         .status(422)
         .json({})
     }
-
+    const requestData = request.all()
     const file = request.file('file')
     if (!file) {
       return response
@@ -50,6 +50,9 @@ export default class AssetsController {
       asset: file.clientName,
       mime: file.extname,
       path,
+      user_id: requestData.user_id || null,
+      group_id: requestData.group_id || null,
+      product_id: requestData.product_id || null,
     }
 
     await file.move(Application.tmpPath('uploads'), {

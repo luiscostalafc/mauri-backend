@@ -8,7 +8,7 @@ export default class StockOperations extends BaseSchema {
       table.increments('id')
       table.integer('quantity').unsigned().notNullable()
       table.float('unit_value').notNullable()
-      table.text('comment')
+      table.text('comment').nullable()
       table.integer('operation_id').unsigned().notNullable()
       table.integer('product_id').unsigned().notNullable()
 

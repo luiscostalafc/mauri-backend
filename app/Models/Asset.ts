@@ -1,5 +1,5 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column, manyToMany, ManyToMany } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, column, HasOne, hasOne } from '@ioc:Adonis/Lucid/Orm'
 import User from './User'
 import Group from './Group'
 import Product from './Product'
@@ -23,18 +23,21 @@ export default class Asset extends BaseModel {
   @column()
   public path: string
 
-  @manyToMany(() => User, {
-    pivotTable: 'assets_has_users',
-  })
-  public user: ManyToMany<typeof User>
+  @column()
+  public user_id: number
 
-  @manyToMany(() => Group, {
-    pivotTable: 'groups_has_assets',
-  })
-  public group: ManyToMany<typeof Group>
+  @column()
+  public group_id: number
 
-  @manyToMany(() => Product, {
-    pivotTable: 'products_has_assets',
-  })
-  public product: ManyToMany<typeof Product>
+  @column()
+  public product_id: number
+
+  @hasOne(() => User)
+  public user: HasOne<typeof User>
+
+  @hasOne(() => Group)
+  public group: HasOne<typeof Group>
+
+  @hasOne(() => Product)
+  public product: HasOne<typeof Product>
 }

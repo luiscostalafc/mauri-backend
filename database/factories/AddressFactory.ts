@@ -1,8 +1,10 @@
 import Factory from '@ioc:Adonis/Lucid/Factory'
 import Address from 'App/Models/Address'
+import { randomUserId } from './UserFactory'
 
 export const AddressFactory = Factory
-  .define(Address, ({ faker }) => ({
+  .define(Address, async ({ faker }) => ({
+    user_id: await randomUserId(),
     cep: faker.address.zipCode(),
     zone: faker.address.cityPrefix(),
     state: faker.address.state(),

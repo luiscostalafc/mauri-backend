@@ -1,8 +1,10 @@
 import Factory from '@ioc:Adonis/Lucid/Factory'
 import Phone from 'App/Models/Phone'
+import { randomUserId } from './UserFactory'
 
 export const PhoneFactory = Factory
-  .define(Phone, ({ faker }) => ({
+  .define(Phone, async ({ faker }) => ({
+    user_id: await randomUserId(),
     type: faker.random.arrayElement(['celular', 'fixo', 'comercial', 'contato']),
     area_code: String(faker.random.number(99)),
     phone: faker.phone.phoneNumber(),

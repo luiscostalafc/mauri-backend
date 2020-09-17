@@ -1,15 +1,18 @@
-import { schema } from '@ioc:Adonis/Core/Validator'
+import { schema, rules } from '@ioc:Adonis/Core/Validator'
 
 export const AddressSchema = schema.create({
-  cep: schema.string(),
-  zone: schema.string(),
-  state: schema.string(),
-  city: schema.string(),
-  country: schema.string(),
-  district: schema.string(),
-  street: schema.string(),
-  number: schema.string(),
-  complement: schema.string(),
-  delivery: schema.boolean(),
-  inactive: schema.boolean(),
+  // cep: schema.string(), // all nullable in DB
+  // zone: schema.string(), // all nullable in DB
+  // state: schema.string(), // all nullable in DB
+  // city: schema.string(), // all nullable in DB
+  // country: schema.string(), // all nullable in DB
+  // district: schema.string(), // all nullable in DB
+  // street: schema.string(), // all nullable in DB
+  // number: schema.string(), // all nullable in DB
+  // complement: schema.string(), // all nullable in DB
+  // delivery: schema.boolean(), // all nullable in DB
+  // inactive: schema.boolean(), // all nullable in DB
+  user_id: schema.number([
+    rules.exists({ table: 'users', column: 'id' }),
+  ]),
 })

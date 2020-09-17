@@ -1,7 +1,7 @@
 import Factory from '@ioc:Adonis/Lucid/Factory'
 import StockOperation from 'App/Models/StockOperation'
 import { randomOperationId } from './OperationFactory'
-import { randomProductId } from './ProductFactoryFactory'
+import { randomProductId } from './ProductFactory'
 
 export const StockOperationFactory = Factory
   .define(StockOperation, async ({ faker }) => ({
