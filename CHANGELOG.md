@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.4.0](https://github.com/EmersonBraun/node_ecommerce/compare/v0.3.0...v0.4.0) (2020-09-17)
+
+
+### Features
+
+* refactor many relations ([207dfa0](https://github.com/EmersonBraun/node_ecommerce/commit/207dfa0251c534c1aa510168d10ea2200b25132f))
+
 ## [0.3.0](https://github.com/EmersonBraun/node_ecommerce/compare/v0.0.1...v0.3.0) (2020-09-17)
 
 
