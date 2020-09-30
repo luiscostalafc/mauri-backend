@@ -2,7 +2,7 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
 import UsersRepository from 'App/Repositories/UsersRepository'
-import { UserSchema } from 'App/Validators'
+import { UserSchema, UserUpdateSchema } from 'App/Validators'
 
 export default class UsersController {
   private readonly repository
@@ -58,7 +58,7 @@ export default class UsersController {
 
   async update ({ params, request, response }: HttpContextContract) {
     try {
-      await request.validate({schema: UserSchema})
+      await request.validate({schema: UserUpdateSchema})
     } catch (error) {
       const msg = error.messages.errors.map(e => `${e.field} is ${e.rule}`).join(', ')
       return response

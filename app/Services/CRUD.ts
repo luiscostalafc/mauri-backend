@@ -132,15 +132,16 @@ export async function createOrUpdate (Model, id, body: any) {
 }
 
 export async function findAndUpdate (Model, id: any, body: any) {
-  const res = await Model.query().where('id', id)
+  let contentError = ''
+  // const res = await Model.query().where('id', id)
 
-  if(!res.length) {
-    statusCode = 404
-    returnType = getHappen(statusCode)
-    message = getMessage('found', statusCode)
+  // if(!res.length) {
+  //   statusCode = 404
+  //   returnType = getHappen(statusCode)
+  //   message = getMessage('found', statusCode)
 
-    return { data: {}, statusCode, returnType, message, contentError }
-  }
+  //   return { data: {}, statusCode, returnType, message, contentError }
+  // }
 
   try {
     data = await Model.query().where('id', id).update(body)
@@ -149,8 +150,8 @@ export async function findAndUpdate (Model, id: any, body: any) {
     contentError = error
   }
 
-  const returnData = data ? body : {}
-  statusCode = getSatusCode(contentError, 'update')
+  const returnData = data ? body : []
+  statusCode = contentError.length ? 400 : 200
   returnType = getHappen(statusCode)
   message = getMessage('update', statusCode)
 

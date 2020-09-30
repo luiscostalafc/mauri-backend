@@ -1,6 +1,6 @@
 import { schema, rules } from '@ioc:Adonis/Core/Validator'
 
-export const UserSchema = schema.create({
+export const UserUpdateSchema = schema.create({
   name: schema.string(),
   username: schema.string.optional(),
   password: schema.string.optional(),
@@ -8,7 +8,6 @@ export const UserSchema = schema.create({
   complete_name: schema.string.optional(),
   email: schema.string({}, [
     rules.email(),
-    rules.unique({ table: 'users', column: 'email' }),
   ]),
   rg: schema.string(),
   cpf_cnpj: schema.string(),

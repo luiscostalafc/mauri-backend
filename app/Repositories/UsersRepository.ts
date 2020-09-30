@@ -20,6 +20,13 @@ class UsersRepository {
     this.model = User
   }
 
+  castValues (data) {
+    data.is_provider = Boolean(data?.is_provider)
+    data.inactive = Boolean(data?.inactive)
+
+    return data
+  }
+
   async first () {
     return await first(this.model)
   }
@@ -33,14 +40,17 @@ class UsersRepository {
   }
 
   async create (data: any) {
+    data = this.castValues(data)
     return await create(this.model, data)
   }
 
   async createOrUpdate (id: any, data: any) {
+    data = this.castValues(data)
     return await createOrUpdate(this.model, id, data)
   }
 
   async findAndUpdate (id: any, data: any) {
+    data = this.castValues(data)
     return await findAndUpdate(this.model, id, data)
   }
 
