@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.5.0](https://github.com/EmersonBraun/mauri-backend/compare/v0.4.1...v0.5.0) (2020-09-30)
+
+
+### Features
+
+* finish basic admin CRUD ([bdb0189](https://github.com/EmersonBraun/mauri-backend/commit/bdb018949b595c92701b87336362226b2af47f1f))
+
 ### [0.4.1](https://github.com/EmersonBraun/mauri-backend/compare/v0.4.0...v0.4.1) (2020-09-30)
 
 
