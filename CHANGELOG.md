@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.4.1](https://github.com/EmersonBraun/mauri-backend/compare/v0.4.0...v0.4.1) (2020-09-30)
+
+
+### Features
+
+* withou auth ([cff7cc4](https://github.com/EmersonBraun/mauri-backend/commit/cff7cc4b99a9f96a491779532286d116495a80f3))
+
 ## [0.4.0](https://github.com/EmersonBraun/node_ecommerce/compare/v0.3.0...v0.4.0) (2020-09-17)
 
 
