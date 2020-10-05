@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.5.1](https://github.com/EmersonBraun/mauri-backend/compare/v0.5.0...v0.5.1) (2020-10-05)
+
+
+### Bug Fixes
+
+* update insomnia ([1a3da2a](https://github.com/EmersonBraun/mauri-backend/commit/1a3da2ac096c6b3d86d1a7cbe740cc91062c7ec1))
+
 ## [0.5.0](https://github.com/EmersonBraun/mauri-backend/compare/v0.4.1...v0.5.0) (2020-09-30)
 
 
