@@ -18,20 +18,6 @@ class ProductsRepository {
 
   castValues (data) {
     data.inactive = Boolean(data?.inactive)
-    data.group_id = Number(data?.group_id)
-    data.subgroup_id = Number(data?.subgroup_id)
-    data.year_start = Number(data?.year_start)
-    data.year_end = Number(data?.year_end)
-    data.quantity_used = Number(data?.quantity_used)
-    data.quantity_package = Number(data?.quantity_package)
-    data.size = Number(data?.size)
-    data.height = Number(data?.height)
-    data.width = Number(data?.width)
-    data.lenth = Number(data?.lenth)
-    data.weight = Number(data?.weight)
-    data.inner_diameter = Number(data?.inner_diameter)
-    data.external_diameter = Number(data?.external_diameter)
-
     return data
   }
 
