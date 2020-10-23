@@ -22,7 +22,7 @@ export default class AuthMiddleware {
    * of the mentioned guards and that guard will be used by the rest of the code
    * during the current request.
    */
-  protected async authenticate (auth: HttpContextContract['auth'], guards: string[]) {
+  protected async authenticate (auth: HttpContextContract['auth'], guards: string[] | any) {
     for (let guard of guards) {
       if (await auth.use(guard).check()) {
         /**
