@@ -2,6 +2,7 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
 import OrderStatusesRepository from 'App/Repositories/OrderStatusesRepository'
+import { getErrors } from 'App/Services/MessageErros'
 import { OrderStatusSchema } from 'App/Validators'
 
 export default class OrderStatusesController {
@@ -25,7 +26,7 @@ export default class OrderStatusesController {
     try {
       await request.validate({schema: OrderStatusSchema})
     } catch (error) {
-      const msg = error.messages.errors.map(e => `${e.field} is ${e.rule}`).join(', ')
+      const msg = getErrors(error)
       // console.log(error.messages.errors)
       return response
         .safeHeader('returnType', 'error')
@@ -60,7 +61,7 @@ export default class OrderStatusesController {
     try {
       await request.validate({schema: OrderStatusSchema})
     } catch (error) {
-      const msg = error.messages.errors.map(e => `${e.field} is ${e.rule}`).join(', ')
+      const msg = getErrors(error)
       return response
         .safeHeader('returnType', 'error')
         .safeHeader('message', 'Validation error')

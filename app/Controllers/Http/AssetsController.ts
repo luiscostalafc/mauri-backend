@@ -3,6 +3,7 @@ import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Application from '@ioc:Adonis/Core/Application'
 
 import AssetsRepository from 'App/Repositories/AssetsRepository'
+import { getErrors } from 'App/Services/MessageErros'
 import { AssetSchema } from 'App/Validators'
 
 export default class AssetsController {
@@ -26,7 +27,7 @@ export default class AssetsController {
     try {
       await request.validate({schema: AssetSchema})
     } catch (error) {
-      const msg = error.messages.errors.map(e => `${e.field} is ${e.rule}`).join(', ')
+      const msg = getErrors(error)
       return response
         .safeHeader('returnType', 'error')
         .safeHeader('message', 'Validation error')
@@ -86,7 +87,7 @@ export default class AssetsController {
     try {
       await request.validate({schema: AssetSchema})
     } catch (error) {
-      const msg = error.messages.errors.map(e => `${e.field} is ${e.rule}`).join(', ')
+      const msg = getErrors(error)
       return response
         .safeHeader('returnType', 'error')
         .safeHeader('message', 'Validation error')

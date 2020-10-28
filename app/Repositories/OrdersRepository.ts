@@ -1,8 +1,10 @@
 /* eslint-disable @typescript-eslint/explicit-member-accessibility */
 import Logger from '@ioc:Adonis/Core/Logger'
+import Database from '@ioc:Adonis/Lucid/Database'
 
-import { first, all, create, findAndUpdate, find, createOrUpdate, findAndDelete } from '../Services/CRUD'
+import { first, create, findAndUpdate, find, createOrUpdate, findAndDelete } from '../Services/CRUD'
 import Order from 'App/Models/Order'
+import { mountResponse } from 'App/Services/ResponseUtils'
 
 class OrdersRepository {
   protected model: any
@@ -25,7 +27,21 @@ class OrdersRepository {
   }
 
   async all () {
-    return await all(this.model)
+    let data; let contentError = []
+    try {
+      data = await Database
+        .rawQuery(`
+          SELECT *
+          FROM orders 
+          RIGHT JOIN "users" on "users"."id" = "orders"."user_id" 
+          RIGHT JOIN "order_statuses" on "order_statuses"."id" = "orders"."order_status_id" 
+          RIGHT JOIN "deliveries" on "deliveries"."id" = "orders"."delivery_id"
+          `)
+    } catch (error) {
+      contentError = error
+    }
+
+    return mountResponse(data.rows, contentError, 'load')
   }
 
   async find (id) {

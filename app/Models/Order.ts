@@ -1,5 +1,5 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column, HasOne, hasOne } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, column, computed, HasOne, hasOne } from '@ioc:Adonis/Lucid/Orm'
 import User from './User'
 import OrderStatus from './OrderStatus'
 import Delivery from './Delivery'
@@ -28,6 +28,11 @@ export default class Order extends BaseModel {
 
   @hasOne(() => User)
   public user: HasOne<typeof User>
+
+  @computed()
+  public get extras () {
+    return this.$extras
+  }
 
   @hasOne(() => User)
   public provider: HasOne<typeof User>

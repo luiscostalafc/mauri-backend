@@ -2,6 +2,7 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
 import ProductsRepository from 'App/Repositories/ProductsRepository'
+import { getErrors } from 'App/Services/MessageErros'
 import { ProductSchema } from 'App/Validators'
 
 export default class ProductsController {
@@ -25,7 +26,7 @@ export default class ProductsController {
     try {
       await request.validate({schema: ProductSchema})
     } catch (error) {
-      const msg = error.messages.errors.map(e => `${e.field} is ${e.rule}`).join(', ')
+      const msg = getErrors(error)
       // console.log(error.messages.errors)
       return response
         .safeHeader('returnType', 'error')
@@ -60,7 +61,7 @@ export default class ProductsController {
     try {
       await request.validate({schema: ProductSchema})
     } catch (error) {
-      const msg = error.messages.errors.map(e => `${e.field} is ${e.rule}`).join(', ')
+      const msg = getErrors(error)
       return response
         .safeHeader('returnType', 'error')
         .safeHeader('message', 'Validation error')

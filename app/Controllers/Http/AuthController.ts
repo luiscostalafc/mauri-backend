@@ -1,4 +1,5 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+import { getErrors } from 'App/Services/MessageErros'
 import { AuthSchema } from 'App/Validators'
 
 export default class AuthController {
@@ -6,7 +7,7 @@ export default class AuthController {
     try {
       await request.validate({schema: AuthSchema})
     } catch (error) {
-      const msg = error.messages.errors.map(e => `${e.field} is ${e.rule}`).join(', ')
+      const msg = getErrors(error)
       return response
         .safeHeader('returnType', 'error')
         .safeHeader('message', 'Validation error')

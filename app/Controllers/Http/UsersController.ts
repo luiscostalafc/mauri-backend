@@ -2,6 +2,7 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
 import UsersRepository from 'App/Repositories/UsersRepository'
+import { getErrors } from 'App/Services/MessageErros'
 import { UserSchema, UserUpdateSchema } from 'App/Validators'
 
 export default class UsersController {
@@ -25,7 +26,7 @@ export default class UsersController {
     try {
       await request.validate({schema: UserSchema})
     } catch (error) {
-      const msg = error.messages.errors.map(e => `${e.field} is ${e.rule}`).join(', ')
+      const msg = getErrors(error)
       // console.log(error.messages.errors)
       return response
         .safeHeader('returnType', 'error')
@@ -60,7 +61,7 @@ export default class UsersController {
     try {
       await request.validate({schema: UserUpdateSchema})
     } catch (error) {
-      const msg = error.messages.errors.map(e => `${e.field} is ${e.rule}`).join(', ')
+      const msg = getErrors(error)
       return response
         .safeHeader('returnType', 'error')
         .safeHeader('message', 'Validation error')
