@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.6.0](https://github.com/EmersonBraun/mauri-backend/compare/v0.5.1...v0.6.0) (2020-10-28)
+
+
+### Features
+
+* add service to get error messages ([25a69dd](https://github.com/EmersonBraun/mauri-backend/commit/25a69dd149e4f808ba1d449273597c6f4aef98ea))
+
+
+### Bug Fixes
+
+* update Bugs in the Typescript ([0f57b06](https://github.com/EmersonBraun/mauri-backend/commit/0f57b0621a7275b74aa96efbf0eb3d370d773cef))
+
 ### [0.5.1](https://github.com/EmersonBraun/mauri-backend/compare/v0.5.0...v0.5.1) (2020-10-05)
 
 
