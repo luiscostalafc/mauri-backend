@@ -7,6 +7,8 @@ export const getErrors = (error: { messages: { errors: any[] } }) => {
 
 const getRule = (rule: string) => {
   switch (rule) {
+    case 'required':
+      return 'é obrigatório'
     case 'alpha':
       return 'deve ser alfa'
     case 'confirmed':
