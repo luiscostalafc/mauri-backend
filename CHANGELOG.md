@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.7.0](https://github.com/EmersonBraun/mauri-backend/compare/v0.6.1...v0.7.0) (2020-12-02)
+
+
+### Features
+
+* add fixed groups ([894f74e](https://github.com/EmersonBraun/mauri-backend/commit/894f74efd1a264c794ba29157da4d0b5427a73ce))
+
 ### [0.6.1](https://github.com/EmersonBraun/mauri-backend/compare/v0.6.0...v0.6.1) (2020-10-28)
 
 
