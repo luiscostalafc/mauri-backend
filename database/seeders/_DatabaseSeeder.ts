@@ -1,30 +1,36 @@
 import BaseSeeder from '@ioc:Adonis/Lucid/Seeder'
+import Group from 'App/Models/Group'
+import User from 'App/Models/User'
 import {
   AddressFactory,
   CardFactory,
-  GroupFactory,
-  SubgroupFactory,
-  UserFactory,
   DeliveryFactory,
-  PermissionFactory,
-  UserGroupFactory,
-  PhoneFactory,
-  OrderStatusFactory,
+  OperationFactory,
   OrderDetailFactory,
-  // AssetFactory,
+  OrderStatusFactory,
+  PermissionFactory,
+  PhoneFactory,
+  ProductAsingmentFactory,
   ProductFactory,
   ProductVariationFactory,
-  OperationFactory,
   StockOperationFactory,
+  SubgroupFactory,
   SynonymFactory,
-  ProductAsingmentFactory,
+  UserFactory,
+  UserGroupFactory,
 } from 'Database/factories'
 import { OrderFactory } from 'Database/factories/OrderFactory'
-import User from 'App/Models/User'
 
 export default class AddressSeeder extends BaseSeeder {
   public async run () {
-    await GroupFactory.createMany(10)
+    await Group.updateOrCreateMany('group',[
+      {group: 'Auto Peças'},
+      {group: 'Moto Peças'},
+      {group: 'Bicicletas'},
+      {group: 'Ferramentas'},
+      {group: 'Livraria'},
+      {group: 'Papelaria'},
+    ])
     await SubgroupFactory.createMany(10)
     await UserFactory.createMany(10)
     await DeliveryFactory.createMany(10)

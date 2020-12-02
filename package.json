@@ -5,6 +5,7 @@
   "scripts": {
     "build": "node ace build",
     "up": "docker-compose up -d",
+    "down": "docker-compose down",
     "migrate": "node ace migration:run",
     "seed": "node ace db:seed --files=_DatabaseSeeder",
     "dev:server": "node ace serve --watch",
