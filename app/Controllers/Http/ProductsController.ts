@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/explicit-member-accessibility */
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-
 import ProductsRepository from 'App/Repositories/ProductsRepository'
 import { getErrors } from 'App/Services/MessageErros'
 import { ProductSchema } from 'App/Validators'
@@ -11,8 +10,8 @@ export default class ProductsController {
     this.repository = ProductsRepository
   }
 
-  async index ({ response }: HttpContextContract) {
-    const register = await this.repository.all()
+  async index ({ response, request }: HttpContextContract) {
+    const register = await this.repository.all(request.all())
     const { data, statusCode, returnType, message, contentError } = register
     return response
       .safeHeader('returnType', returnType)
