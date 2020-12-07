@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.8.0](https://github.com/EmersonBraun/mauri-backend/compare/v0.7.0...v0.8.0) (2020-12-07)
+
+
+### Features
+
+* add columns in products ([a40454e](https://github.com/EmersonBraun/mauri-backend/commit/a40454ee802ad66d07fe9dfd3533202969948fcc))
+* add filter functions ([bcded15](https://github.com/EmersonBraun/mauri-backend/commit/bcded15a44b8e3d024e99c3721dfb885923995c4))
+
 ## [0.7.0](https://github.com/EmersonBraun/mauri-backend/compare/v0.6.1...v0.7.0) (2020-12-02)
 
 
