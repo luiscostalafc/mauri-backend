@@ -1,4 +1,4 @@
-import { schema, rules } from '@ioc:Adonis/Core/Validator'
+import { rules, schema } from '@ioc:Adonis/Core/Validator'
 
 export const ProductSchema = schema.create({
   inactive: schema.boolean.optional(),
@@ -34,4 +34,10 @@ export const ProductSchema = schema.create({
   weight: schema.number.optional(),
   inner_diameter: schema.number.optional(),
   external_diameter: schema.number.optional(),
+
+  fuel: schema.string.optional(),
+  chassi: schema.string.optional(),
+  year_fab: schema.string.optional(),
+  year_model: schema.string.optional(),
+  quality: schema.string.optional(),
 })

@@ -34,6 +34,12 @@ export const ProductFactory = Factory
     color: faker.commerce.color(),
     material: faker.lorem.word(),
     obs: faker.lorem.words(5),
+
+    fuel: faker.random.arrayElement(['gasolina', 'alcool']),
+    chassi: faker.random.number(200).toString(),
+    year_fab: faker.date.past(10).getFullYear().toString(),
+    year_model: faker.date.past(10).getFullYear().toString(),
+    quality: faker.random.arrayElement(['original', 'similar']),
   }))
   .build()
 

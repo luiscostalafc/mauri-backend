@@ -50,7 +50,7 @@ export default class AddressSeeder extends BaseSeeder {
     await OperationFactory.createMany(10)
     await StockOperationFactory.createMany(10)
     await SynonymFactory.createMany(10)
-    await User.createMany([
+    await User.updateOrCreateMany('email',[
       {
         name: 'admin of system',
         username: 'admin',

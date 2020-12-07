@@ -1,11 +1,11 @@
+import { BaseModel, column, hasMany, HasMany, hasOne, HasOne, manyToMany, ManyToMany } from '@ioc:Adonis/Lucid/Orm'
 import { DateTime } from 'luxon'
-import { BaseModel, column, hasOne, HasOne, manyToMany, ManyToMany, hasMany, HasMany } from '@ioc:Adonis/Lucid/Orm'
-import Group from './Group'
-import Subgroup from './Subgroup'
 import Asset from './Asset'
+import Group from './Group'
 import ProductAsingment from './ProductAsingment'
-import StockOperation from './StockOperation'
 import ProductVariation from './ProductVariation'
+import StockOperation from './StockOperation'
+import Subgroup from './Subgroup'
 
 export default class Product extends BaseModel {
   @column({ isPrimary: true })
@@ -95,6 +95,21 @@ export default class Product extends BaseModel {
 
   @column()
   public obs: string
+
+  @column()
+  public fuel: string
+
+  @column()
+  public chassi: string
+
+  @column()
+  public year_fab: string
+
+  @column()
+  public year_model: string
+
+  @column()
+  public quality: string
 
   @hasOne(() => Group)
   public group: HasOne<typeof Group>
