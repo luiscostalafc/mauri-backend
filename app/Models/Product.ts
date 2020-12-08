@@ -110,6 +110,8 @@ export default class Product extends BaseModel {
 
   @column()
   public quality: string
+  @column()
+  public price: string
 
   @hasOne(() => Group)
   public group: HasOne<typeof Group>
@@ -127,7 +129,7 @@ export default class Product extends BaseModel {
   public stockOperation: HasMany<typeof StockOperation>
 
   @manyToMany(() => Asset, {
-    pivotTable: 'products_has_assets',
+    pivotTable: 'assets',
   })
   public asset: ManyToMany<typeof Asset>
 }

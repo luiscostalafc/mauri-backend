@@ -40,6 +40,7 @@ export const ProductFactory = Factory
     year_fab: faker.date.past(10).getFullYear().toString(),
     year_model: faker.date.past(10).getFullYear().toString(),
     quality: faker.random.arrayElement(['original', 'similar']),
+    price: faker.random.number(200),
   }))
   .build()
 
