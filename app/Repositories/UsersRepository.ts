@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/explicit-member-accessibility */
 import Logger from '@ioc:Adonis/Core/Logger'
 
-import { first, all, create, findAndUpdate, find, createOrUpdate, findAndDelete } from '../Services/CRUD'
+import { first, all, create, findAndUpdate, find, createOrUpdate, findAndDelete, findByEmail } from '../Services/CRUD'
 import User from 'App/Models/User'
 
 class UsersRepository {
@@ -37,6 +37,10 @@ class UsersRepository {
 
   async find (id) {
     return await find(this.model, id)
+  }
+
+  async findByEmail (email) {
+    return await findByEmail(this.model, email)
   }
 
   async create (data: any) {

@@ -7,6 +7,9 @@ import Permission from './Permission'
 import UserGroup from './UserGroup'
 import Phone from './Phone'
 import Order from './Order'
+import uploadConfig from '../../config/upload'
+
+import { Exclude, Expose } from 'class-transformer'
 
 export default class User extends BaseModel {
   @column({ isPrimary: true })
@@ -25,6 +28,7 @@ export default class User extends BaseModel {
   public username: string
 
   @column({ serializeAs: null })
+  @Exclude()
   public password: string
 
   @column()
@@ -50,6 +54,25 @@ export default class User extends BaseModel {
 
   @column()
   public inactive: boolean
+
+  @column()
+  public avatar: string
+
+  @Expose({ name: 'avatar_url' })
+  public getAvatar_url (): string | null | undefined {
+    if (!this.avatar) {
+      return null
+    }
+
+    switch (uploadConfig.driver) {
+      case 'disk':
+        return `${process.env.APP_API_URL}/files/${this.avatar}`
+      case 's3':
+        return `https://${uploadConfig.config.aws.bucket}.s3.amazonaws.com/${this.avatar}`
+      default:
+        return null
+    }
+  }
 
   // @column()
   // public rememberMeToken?: string

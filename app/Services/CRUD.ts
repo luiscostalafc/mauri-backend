@@ -86,6 +86,21 @@ export async function find (Model, id: any) {
   return { data:data || {}, statusCode, returnType, message, contentError }
 }
 
+export async function findByEmail (Model, email: any) {
+  try{
+    data = await Model.find(email)
+  } catch(error) {
+    logError('find', error)
+    contentError = error
+  }
+
+  statusCode = data ? 200 : 404
+  returnType = getHappen(statusCode)
+  message = getMessage('found', statusCode)
+
+  return { data:data || {}, statusCode, returnType, message, contentError }
+}
+
 export async function findOrFail (Model, id: any) {
   try{
     data = await Model.findOrFail(id)
