@@ -17,6 +17,7 @@ export const ProductFactory = Factory
     complement: faker.name.lastName(),
     quantity_used: faker.random.number(30),
     quantity_package: faker.random.number(30),
+    price: faker.random.number(30),
 
     size: faker.random.number(200),
     height: faker.random.number(200),
@@ -40,7 +41,6 @@ export const ProductFactory = Factory
     year_fab: faker.date.past(10).getFullYear().toString(),
     year_model: faker.date.past(10).getFullYear().toString(),
     quality: faker.random.arrayElement(['original', 'similar']),
-    price: faker.random.number(200),
   }))
   .build()
 

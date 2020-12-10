@@ -110,8 +110,9 @@ export default class Product extends BaseModel {
 
   @column()
   public quality: string
+
   @column()
-  public price: string
+  public price: number
 
   @hasOne(() => Group)
   public group: HasOne<typeof Group>
