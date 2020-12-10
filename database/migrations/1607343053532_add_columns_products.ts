@@ -5,11 +5,11 @@ export default class Products extends BaseSchema {
 
   public async up () {
     this.schema.table(this.tableName, (table) => {
-      table.string('fuel')
-      table.string('chassi')
-      table.string('year_fab')
-      table.string('year_model')
-      table.string('quality')
+      table.string('fuel').nullable()
+      table.string('chassi').nullable()
+      table.string('year_fab').nullable()
+      table.string('year_model').nullable()
+      table.string('quality').nullable()
     })
   }
 

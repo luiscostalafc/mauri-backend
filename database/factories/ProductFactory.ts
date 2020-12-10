@@ -18,7 +18,7 @@ export const ProductFactory = Factory
     quantity_used: faker.random.number(30),
     quantity_package: faker.random.number(30),
 
-    size: faker.random.number(200),
+    measure: faker.random.number(200), // old size
     height: faker.random.number(200),
     width: faker.random.number(200),
     lenth: faker.random.number(200),
@@ -28,7 +28,7 @@ export const ProductFactory = Factory
 
     title: faker.name.title(),
     name: faker.name.firstName(),
-    type: faker.name.jobArea(),
+    branch_type: faker.name.jobArea(), // old type
     position: faker.random.arrayElement(['horizontal', 'vertical']),
     system: faker.lorem.word(),
     color: faker.commerce.color(),
@@ -40,6 +40,25 @@ export const ProductFactory = Factory
     year_fab: faker.date.past(10).getFullYear().toString(),
     year_model: faker.date.past(10).getFullYear().toString(),
     quality: faker.random.arrayElement(['original', 'similar']),
+
+    provider_description: faker.name.findName(),
+    depth: faker.name.findName(),
+    ncm: faker.name.findName(),
+    sku: faker.name.findName(),
+    eam: faker.name.findName(),
+    oem: faker.name.findName(),
+    mpn: faker.name.findName(),
+    brand: faker.name.findName(),
+    purchase_packaging: faker.name.findName(),
+    place: faker.name.findName(),
+    unity: faker.name.findName(),
+    cost_price: faker.name.findName(),
+    sale_price: faker.name.findName(),
+    description: faker.name.findName(),
+    type_mlb: faker.name.findName(),
+    variations_mlb: faker.name.findName(),
+    assignments_mlb: faker.name.findName(),
+    category_id_mlb: faker.name.findName(),
   }))
   .build()
 

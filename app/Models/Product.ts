@@ -52,7 +52,7 @@ export default class Product extends BaseModel {
   public quantity_package: number
   // dimension
   @column()
-  public size: number
+  public measure: number
 
   @column()
   public height: number
@@ -79,7 +79,7 @@ export default class Product extends BaseModel {
   public name: string
 
   @column()
-  public type: string
+  public branch_type: string
 
   @column()
   public position: string
@@ -110,6 +110,60 @@ export default class Product extends BaseModel {
 
   @column()
   public quality: string
+
+  @column()
+  public provider_description: string
+
+  @column()
+  public depth: string
+
+  @column()
+  public ncm: string
+
+  @column()
+  public sku: string
+
+  @column()
+  public eam: string
+
+  @column()
+  public oem: string
+
+  @column()
+  public mpn: string
+
+  @column()
+  public brand: string
+
+  @column()
+  public purchase_packaging: string
+
+  @column()
+  public place: string
+
+  @column()
+  public unity: string
+
+  @column()
+  public cost_price: string
+
+  @column()
+  public sale_price: string
+
+  @column()
+  public description: string
+
+  @column()
+  public type_mlb: string
+
+  @column()
+  public variations_mlb: string
+
+  @column()
+  public assignments_mlb: string
+
+  @column()
+  public category_id_mlb: string
 
   @hasOne(() => Group)
   public group: HasOne<typeof Group>
