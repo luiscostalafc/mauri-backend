@@ -71,6 +71,7 @@
     "@adonisjs/core": "^5.0.0-preview-rc-1.9",
     "@adonisjs/fold": "^6.3.5",
     "@adonisjs/lucid": "^8.2.2",
+    "adonis-lucid-mongo": "^3.1.8",
     "argon": "^2.0.21",
     "aws-sdk": "^2.807.0",
     "celebrate": "^13.0.4",
@@ -90,6 +91,7 @@
     "redis": "^3.0.2",
     "reflect-metadata": "^0.1.13",
     "source-map-support": "^0.5.19",
-    "tsyringe": "^4.4.0"
+    "tsyringe": "^4.4.0",
+    "typeorm": "^0.2.29"
   }
 }
