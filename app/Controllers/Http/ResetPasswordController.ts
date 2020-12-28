@@ -4,7 +4,7 @@ import UsersRepository from 'App/Repositories/UsersRepository'
 import { getToken } from 'App/Services/auth'
 import { getErrors } from 'App/Services/MessageErros'
 import { ResetPasswordSchema } from 'App/Validators'
-//import AppError from '../../../errors/AppError'
+import AppError from '../../../errors/AppError'
 
 export default class ResetPasswordController {
   private readonly repository
@@ -34,6 +34,10 @@ export default class ResetPasswordController {
 
     const tokenData = await getToken(email, password, auth)
     const token = tokenData?.data?.token ? tokenData.data.token : ''
+
+    if (token) {
+      throw new AppError('User does not exists')
+    }
 
     return response
       .safeHeader('returnType', returnType)

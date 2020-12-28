@@ -7,6 +7,7 @@ import Permission from './Permission'
 import UserGroup from './UserGroup'
 import Phone from './Phone'
 import Order from './Order'
+import TokenUser from './TokenUser'
 import uploadConfig from '../../config/upload'
 
 import { Exclude, Expose } from 'class-transformer'
