@@ -48,6 +48,7 @@ Route
     Route.resource('synonyms','SynonymsController').apiOnly()
     Route.resource('users','UsersController').apiOnly()
     Route.resource('user-groups','UserGroupsController').apiOnly()
+    Route.resource('reset', 'ResetPasswordController').apiOnly()
   })
   .prefix('/api')
   // .middleware('auth')

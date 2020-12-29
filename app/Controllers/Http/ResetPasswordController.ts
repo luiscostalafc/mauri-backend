@@ -27,13 +27,17 @@ export default class ResetPasswordController {
     }
 
     await this.repository.create(request.all())
-    const { email, name, password } = request.all()
+    const { email, password } = request.all()
 
     const reqUser = await this.repository.findByEmail(email)
-    const { data, statusCode, returnType, message, contentError } = reqUser
+    const { returnType, message, contentError } = reqUser
 
     const tokenData = await getToken(email, password, auth)
     const token = tokenData?.data?.token ? tokenData.data.token : ''
+
+    await auth.use('api').attempt(email, password, {
+      expiresIn: '3 days',
+    })
 
     if (token) {
       throw new AppError('User does not exists')
@@ -43,7 +47,7 @@ export default class ResetPasswordController {
       .safeHeader('returnType', returnType)
       .safeHeader('message', message)
       .safeHeader('contentError', contentError)
-      .status(statusCode)
-      .json(data)
+      .status(204)
+      .json(token.toJSON())
   }
 }
