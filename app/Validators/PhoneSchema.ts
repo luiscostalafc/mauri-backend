@@ -2,7 +2,7 @@ import { schema, rules } from '@ioc:Adonis/Core/Validator'
 
 export const PhoneSchema = schema.create({
   type: schema.string(),
-  //area_code: schema.string(),
+  area_code: schema.string.optional(),
   phone: schema.string(),
   whatsapp: schema.boolean(),
   inactive: schema.boolean.optional(),

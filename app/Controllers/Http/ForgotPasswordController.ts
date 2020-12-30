@@ -6,13 +6,14 @@ import { getErrors } from 'App/Services/MessageErros'
 import { ForgotPasswordSchema} from 'App/Validators'
 import path from 'path'
 import MailProvider from 'providers/MailProvider/models/MailProvider'
-import { inject, injectable } from 'tsyringe'
+//import { inject, injectable } from 'tsyringe'
+import { Inject } from 'typescript-ioc'
 
-@injectable()
+//@injectable()
 export default class ForgotPasswordController {
   private readonly repository
   constructor (
-    @inject('MailProvider')
+    @Inject
     private mailProvider: MailProvider,
   ) {
     this.repository = UsersRepository
