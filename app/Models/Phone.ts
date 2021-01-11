@@ -10,7 +10,7 @@ export default class Phone extends BaseModel {
   @column() public whatsapp: boolean
   @column() public inactive: boolean
   @column() public obs: string
-  @column() public user_id: number
+  @column({columnName: 'user_id'}) public userId: number
   @column.dateTime({ autoCreate: true }) public createdAt: DateTime
   @column.dateTime({ autoCreate: true, autoUpdate: true }) public updatedAt: DateTime
 
