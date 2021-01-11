@@ -26,7 +26,8 @@
     "types": [
       "@adonisjs/core",
       "@adonisjs/lucid",
-      "@adonisjs/auth"
+      "@adonisjs/auth",
+      "@adonisjs/mail"
     ]
   }
 }

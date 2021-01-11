@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/explicit-member-accessibility */
 import Logger from '@ioc:Adonis/Core/Logger'
-
-import { first, all, create, findAndUpdate, find, createOrUpdate, findAndDelete } from '../Services/CRUD'
 import ProductAsingment from 'App/Models/ProductAsingment'
+import { mountResponse } from 'App/Services/ResponseUtils'
+import { all, create, createOrUpdate, find, findAndDelete, findAndUpdate, first } from '../Services/CRUD'
 
 class ProductAsingmentsRepository {
   protected model: any
@@ -26,6 +26,19 @@ class ProductAsingmentsRepository {
 
   async all () {
     return await all(this.model)
+  }
+
+  async search (query) {
+    let contentError = ''
+    let data: any
+    try{
+      data = await this.model.query().where(query)
+    } catch(error) {
+      console.log(error)
+      contentError = error
+    }
+
+    return mountResponse(data, contentError, 'load')
   }
 
   async find (id) {

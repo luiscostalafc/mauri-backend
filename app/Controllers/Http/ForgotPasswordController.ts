@@ -1,21 +1,15 @@
 /* eslint-disable @typescript-eslint/explicit-member-accessibility */
+import Env from '@ioc:Adonis/Core/Env'
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import UsersRepository from 'App/Repositories/UsersRepository'
 import { getToken } from 'App/Services/auth'
+import { sendMail } from 'App/Services/MailService'
 import { getErrors } from 'App/Services/MessageErros'
-import { ForgotPasswordSchema} from 'App/Validators'
-import path from 'path'
-import MailProvider from 'providers/MailProvider/models/MailProvider'
-//import { inject, injectable } from 'tsyringe'
-import { Inject } from 'typescript-ioc'
+import { ForgotPasswordSchema } from 'App/Validators'
 
-//@injectable()
 export default class ForgotPasswordController {
   private readonly repository
-  constructor (
-    @Inject
-    private mailProvider: MailProvider,
-  ) {
+  constructor () {
     this.repository = UsersRepository
   }
 
@@ -33,7 +27,6 @@ export default class ForgotPasswordController {
         .json({})
     }
 
-    await this.repository.create(request.all())
     const { email, name, password } = request.all()
 
     const reqUser = await this.repository.findByEmail(email)
@@ -42,27 +35,19 @@ export default class ForgotPasswordController {
     const tokenData = await getToken(email, password, auth)
     const token = tokenData?.data?.token ? tokenData.data.token : ''
 
-    const forgotPasswordTemplate = path.resolve(
-      __dirname,
-      './../Services/',
-      'views',
-      'forgot_password.hbs',
-    )
-
-    await this.mailProvider.sendMail({
-      to: {
-        name: name,
-        email: email,
-      },
-      subject: '[Liconnection] Recuperação de senha',
-      templateData: {
-        file: forgotPasswordTemplate,
-        variables: {
-          name: name,
-          link: `${process.env.APP_WEB_URL}/reset-password?token=${token}`,
+    if (returnType === 'success') {
+      const baseUrl = Env.get('APP_WEB_URL') as string
+      const link = `${baseUrl}/sign-up-activate?token=${token}`
+      await sendMail({
+        to: email,
+        subject: '[Liconnection] Recuperação de senha',
+        view: 'emails/forgot_password',
+        data: {
+          name,
+          link,
         },
-      },
-    })
+      })
+    }
 
     return response
       .safeHeader('returnType', returnType)

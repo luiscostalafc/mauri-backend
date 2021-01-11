@@ -1,62 +1,31 @@
-import { DateTime } from 'luxon'
 import Hash from '@ioc:Adonis/Core/Hash'
-import { BaseModel, column, beforeSave, manyToMany, ManyToMany, hasOne, HasOne } from '@ioc:Adonis/Lucid/Orm'
-import Card from './Card'
-import Address from './Address'
-import Permission from './Permission'
-import UserGroup from './UserGroup'
-import Phone from './Phone'
-import Order from './Order'
-import uploadConfig from '../../config/upload'
-
+import { BaseModel, beforeSave, column, hasOne, HasOne, manyToMany, ManyToMany } from '@ioc:Adonis/Lucid/Orm'
 import { Exclude, Expose } from 'class-transformer'
+import { DateTime } from 'luxon'
+import uploadConfig from '../../config/upload'
+import Address from './Address'
+import Card from './Card'
+import Order from './Order'
+import Permission from './Permission'
+import Phone from './Phone'
+import UserGroup from './UserGroup'
 
 export default class User extends BaseModel {
-  @column({ isPrimary: true })
-  public id: number
-
-  @column.dateTime({ autoCreate: true })
-  public createdAt: DateTime
-
-  @column.dateTime({ autoCreate: true, autoUpdate: true })
-  public updatedAt: DateTime
-
-  @column()
-  public name: string
-
-  @column()
-  public username: string
-
-  @column({ serializeAs: null })
-  @Exclude()
-  public password: string
-
-  @column()
-  public activity: string
-
-  @column()
-  public complete_name: string
-
-  @column()
-  public email: string
-
-  @column()
-  public rg: string
-
-  @column()
-  public cpf_cnpj: string
-
-  @column()
-  public nick: string
-
-  @column()
-  public is_provider: boolean
-
-  @column()
-  public inactive: boolean
-
-  @column()
-  public avatar: string
+  @column({ isPrimary: true }) public id: number
+  @column() public name: string
+  @column() public username: string
+  @column({ serializeAs: null }) @Exclude() public password: string
+  @column() public activity: string
+  @column() public complete_name: string
+  @column() public email: string
+  @column() public rg: string
+  @column() public cpf_cnpj: string
+  @column() public nick: string
+  @column() public is_provider: boolean
+  @column() public inactive: boolean
+  @column() public avatar: string
+  @column.dateTime({ autoCreate: true }) public createdAt: DateTime
+  @column.dateTime({ autoCreate: true, autoUpdate: true }) public updatedAt: DateTime
 
   @Expose({ name: 'avatar_url' })
   public getAvatar_url (): string | null | undefined {

@@ -5,10 +5,10 @@
  * file.
  */
 
-import Env from '@ioc:Adonis/Core/Env'
-import { OrmConfig } from '@ioc:Adonis/Lucid/Orm'
 import Application from '@ioc:Adonis/Core/Application'
+import Env from '@ioc:Adonis/Core/Env'
 import { DatabaseConfig } from '@ioc:Adonis/Lucid/Database'
+import { OrmConfig } from '@ioc:Adonis/Lucid/Orm'
 
 const databaseConfig: DatabaseConfig & { orm: Partial<OrmConfig> } = {
   /*

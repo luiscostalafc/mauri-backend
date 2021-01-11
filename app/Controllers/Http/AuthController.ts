@@ -1,8 +1,15 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+import UsersRepository from 'App/Repositories/UsersRepository'
+import { getToken } from 'App/Services/auth'
 import { getErrors } from 'App/Services/MessageErros'
-import { AuthSchema } from 'App/Validators'
+import { AuthSchema } from 'App/Validators/AuthSchema'
 
 export default class AuthController {
+  private readonly repository
+  constructor () {
+    this.repository = UsersRepository
+  }
+
   public async login ({ request, response, auth }: HttpContextContract) {
     try {
       await request.validate({schema: AuthSchema})
@@ -19,36 +26,20 @@ export default class AuthController {
     const email = request.input('email')
     const password = request.input('password')
 
-    try {
-      const token = await auth.use('api').attempt(email, password)
+    const tokenData = await getToken(email, password, auth)
 
-      console.log(token)
-      return response
-        .safeHeader('returnType', 'success')
-        .safeHeader('message', 'User logged')
-        .safeHeader('contentError', '')
-        .status(200)
-        .json(token.toJSON())
-    } catch (error) {
-      console.log(error)
-      if (error.code === 'E_INVALID_AUTH_UID') {
-        return response
-          .safeHeader('returnType', 'error')
-          .safeHeader('message', 'User not found')
-          .safeHeader('contentError', 'User not found')
-          .status(401)
-          .json({})
-      }
+    const {returnType,message,contentError,status,data} = tokenData
+    const token = data?.token ? data.token : ''
 
-      if (error.code === 'E_INVALID_AUTH_PASSWORD') {
-        return response
-          .safeHeader('returnType', 'error')
-          .safeHeader('message', 'Email or password is wrong')
-          .safeHeader('contentError', 'Email or password is wrong')
-          .status(401)
-          .json({})
-      }
-    }
+    const reqUser = await this.repository.findByEmail(email)
+    const userData = reqUser?.data
+
+    return response
+      .safeHeader('returnType', returnType)
+      .safeHeader('message', message)
+      .safeHeader('contentError', contentError)
+      .status(status)
+      .json({token, user: userData})
   }
 
   public async logout ({ response, auth }: HttpContextContract) {

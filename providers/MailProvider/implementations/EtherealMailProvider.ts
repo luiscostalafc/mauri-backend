@@ -1,9 +1,8 @@
 import nodemailer, { Transporter } from 'nodemailer'
-//import { inject, injectable } from 'tsyringe'
-import { Inject } from 'typescript-ioc'
-
-import MailTemplateProvider from 'providers/MailTemplateProvider/models/MailTemplateProvider'
 import MailProvider from 'providers/MailProvider/models/MailProvider'
+//import { inject, injectable } from 'tsyringe'
+// import { Inject } from 'typescript-ioc'
+import MailTemplateProvider from 'providers/MailTemplateProvider/models/MailTemplateProvider'
 import SendMailDTO from '../dtos/SendMailDTO'
 
 //@injectable()
@@ -11,7 +10,7 @@ export default class EtherealMailProvider implements MailProvider {
   private client: Transporter
 
   constructor (
-    @Inject
+    // @Inject
     private mailTemplateProvider: MailTemplateProvider,
   ) {
     nodemailer.createTestAccount().then(account => {
