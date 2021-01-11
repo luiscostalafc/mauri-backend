@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.8.3](https://github.com/EmersonBraun/mauri-backend/compare/v0.8.2...v0.8.3) (2021-01-11)
+
+
+### Bug Fixes
+
+* solve security aws ([0dafa93](https://github.com/EmersonBraun/mauri-backend/commit/0dafa93be8ff12a044d452390c4ca9a1b0e5b8e2))
+
 ### [0.8.2](https://github.com/EmersonBraun/mauri-backend/compare/v0.8.1...v0.8.2) (2021-01-11)
 
 
