@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.8.1](https://github.com/EmersonBraun/mauri-backend/compare/v0.8.0...v0.8.1) (2021-01-11)
+
+
+### Features
+
+* add Notification Provider ([1e9b734](https://github.com/EmersonBraun/mauri-backend/commit/1e9b734d9ceee287ea98eb20764d4a1a0a131617))
+* create ForgotPasswordRepository ([06dcc08](https://github.com/EmersonBraun/mauri-backend/commit/06dcc08780d1ab165d705acee8433ca978159bda))
+* create mail config ([de244ef](https://github.com/EmersonBraun/mauri-backend/commit/de244ef83ec72e386d09f06b7ce670f33de200c7))
+* create ResetPasswordController ([59bc564](https://github.com/EmersonBraun/mauri-backend/commit/59bc564ef0984354b1649a7801be8fab6ab93764))
+* create ResetPasswordController ([5ab704d](https://github.com/EmersonBraun/mauri-backend/commit/5ab704d2d2dd9ecb6a4b86800b2bf7d70c51b75c))
+* create TokenUser ([e1175f7](https://github.com/EmersonBraun/mauri-backend/commit/e1175f7f687d4b798892883b6a22d15eb6ef1863))
+* sendMail ([26ceb75](https://github.com/EmersonBraun/mauri-backend/commit/26ceb75c92275363d25ce8e40bf2b95a43834463))
+
+
+### Bug Fixes
+
+* adaptação nas injeções de dependências ([edb6a37](https://github.com/EmersonBraun/mauri-backend/commit/edb6a37548e61da3364e740f8cc847f791a83583))
+* solve general problems ([7150935](https://github.com/EmersonBraun/mauri-backend/commit/71509353f7a63dc71580795a8cc60a53246d5e97))
+* update Product Model and include price column ([545bd2b](https://github.com/EmersonBraun/mauri-backend/commit/545bd2b8cb263847df094c201743f48cb02a088d))
+
 ## [0.8.0](https://github.com/EmersonBraun/mauri-backend/compare/v0.7.0...v0.8.0) (2020-12-07)
 
 
