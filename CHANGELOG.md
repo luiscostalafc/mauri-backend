@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.10.0](https://github.com/EmersonBraun/mauri-backend/compare/v0.8.3...v0.10.0) (2021-01-13)
+
+
+### Features
+
+* add insertion with excel ([d2ae6d7](https://github.com/EmersonBraun/mauri-backend/commit/d2ae6d764ad0ad46134fd92e1acb17010e35f0d9))
+
 ## [0.9.0](https://github.com/EmersonBraun/mauri-backend/compare/v0.8.3...v0.9.0) (2021-01-13)
 
 
