@@ -46,6 +46,17 @@ export default class ProductsController {
       .json(data)
   }
 
+  async excel ({ request, response }: HttpContextContract) {
+    const register = await this.repository.excel(request.all())
+    const { data, statusCode, returnType, message, contentError } = register
+    return response
+      .safeHeader('returnType', returnType)
+      .safeHeader('message', message)
+      .safeHeader('contentError', contentError)
+      .status(statusCode)
+      .json(data)
+  }
+
   async search ({ request, response }: HttpContextContract) {
     try {
       await request.validate({schema: ProductSearchSchema})

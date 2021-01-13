@@ -5,7 +5,7 @@ export default class Products extends BaseSchema {
 
   public async up () {
     this.schema.table(this.tableName, (table) => {
-      table.float('price')
+      table.string('price').nullable()
     })
   }
 

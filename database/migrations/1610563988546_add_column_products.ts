@@ -1,17 +1,17 @@
 import BaseSchema from '@ioc:Adonis/Lucid/Schema'
 
-export default class User extends BaseSchema {
-  protected tableName = 'users'
+export default class Products extends BaseSchema {
+  protected tableName = 'products'
 
   public async up () {
     this.schema.table(this.tableName, (table) => {
-      table.string('avatar').nullable()
+      table.string('measure').nullable()
     })
   }
 
   public async down () {
     this.schema.table(this.tableName, (table) => {
-      table.dropColumns('avatar')
+      table.dropColumn('measure')
     })
   }
 }
