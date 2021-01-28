@@ -9,6 +9,7 @@
     "migrate": "node ace migration:run",
     "seed": "node ace db:seed --files=database/seeders/_DatabaseSeeder",
     "dev:server": "node ace serve -w -i='.docker'",
+    "start": "node ace serve -w -i='.docker'",
     "lint": "eslint . --ext=.ts",
     "release:major": "standard-version --release-as major",
     "release:minor": "standard-version --release-as minor",

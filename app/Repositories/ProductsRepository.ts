@@ -7,6 +7,16 @@ import Synonym from 'App/Models/Synonym'
 import { mountResponse } from 'App/Services/ResponseUtils'
 import { all, create, createOrUpdate, find, findAndDelete, findAndUpdate, first } from '../Services/CRUD'
 
+type Excel = Array<{
+  0: string,
+  1: {
+    product: Product,
+    group: Group,
+    subgroup: Subgroup,
+    synonyms: Synonym[]
+  }
+}>
+
 class ProductsRepository {
   protected model: any
   protected group: any
@@ -18,11 +28,11 @@ class ProductsRepository {
   protected statusCode = 400
   protected options = 0
 
-  public logError (func, error) {
+  public logError (func: any, error: any) {
     Logger.warn(`Repository ${func} Error: ${error}`)
   }
 
-  castValues (data) {
+  castValues (data: { inactive: boolean }) {
     data.inactive = Boolean(data?.inactive)
     return data
   }
@@ -38,12 +48,12 @@ class ProductsRepository {
     return await first(this.model)
   }
 
-  async all (request?) {
-    let data
+  async all (request?: Product | {}) {
+    let data: Product[]
     let contentError = []
     if (request !== {}) {
       try {
-        data = await Product.query().where(request)
+        data = await Product.query().where({ ...request })
       } catch (error) {
         data = []
         contentError = error
@@ -53,7 +63,7 @@ class ProductsRepository {
     return await all(this.model)
   }
 
-  async search (query) {
+  async search (query: any) {
     let contentError = ''
     let data: any
     try{
@@ -66,7 +76,7 @@ class ProductsRepository {
     return mountResponse(data, contentError, 'load')
   }
 
-  async find (id) {
+  async find (id: any) {
     return await find(this.model, id)
   }
 
@@ -74,7 +84,7 @@ class ProductsRepository {
     return Object.values(object).every(x => x === null || x === '')
   }
 
-  async firstOrCreateGroup (group) {
+  async firstOrCreateGroup ({ group }: Group) {
     try {
       const res = await Group.firstOrCreate({group},{group})
       return res.serialize().id
@@ -83,7 +93,7 @@ class ProductsRepository {
       // console.log(group)
     }
   }
-  async firstOrCreateSubgroup (subgroup) {
+  async firstOrCreateSubgroup ({ subgroup }: Subgroup) {
     try {
       const res = await Subgroup.firstOrCreate({subgroup},{subgroup})
       return res.serialize().id
@@ -92,9 +102,10 @@ class ProductsRepository {
       // console.log(subgroup)
     }
   }
-  async insertProduct (product, groupId, subgroupId) {
+  async insertProduct (product: Product, groupId: number, subgroupId: number) {
+    const { description } = product
     try {
-      const res = await Product.firstOrCreate({ description: product.description },{...product, groupId, subgroupId})
+      const res = await Product.firstOrCreate({ description },{...product, groupId, subgroupId})
       return res.serialize().id
     } catch (error) {
       console.log(error)
@@ -102,7 +113,7 @@ class ProductsRepository {
     }
   }
 
-  async insertSynonyms (synonyms: any[], productId) {
+  async insertSynonyms (synonyms: any[], productId: any) {
     const ids:any[] = []
     if (!synonyms.length) {
       return ids
@@ -124,13 +135,13 @@ class ProductsRepository {
 
   async excel (data) {
     let contentError = ''
-    const returnData = []
+    const returnData:any = []
+    const excelData:Excel = Object.entries(data)
 
-    let synonymsIds = []
-    for (const d of Object.entries(data)) {
+    for (const d of excelData) {
       const { product, group, subgroup, synonyms } = d[1]
       if (!this.verifyIfIsNullLine(product)) {
-        const groupId = await this.firstOrCreateGroup(group)
+        const groupId:any = await this.firstOrCreateGroup(group)
         const subgroupId = await this.firstOrCreateSubgroup(subgroup)
         const productId = await this.insertProduct(product, groupId, subgroupId)
         const synonymsIds = await this.insertSynonyms(synonyms, productId)
