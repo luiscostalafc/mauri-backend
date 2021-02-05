@@ -34,7 +34,7 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           key: ${{ secrets.SSH_KEY }}
           source: ".,!node_modules"
-          target: "~/mauri-backend"
+          target: "/home/deploy/mauri-backend"
       
       - name: Run production scripts
         uses: appleboy/ssh-action@master
@@ -44,7 +44,7 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           key: ${{ secrets.SSH_KEY }}
           script: |
-            cd ~/mauri-backend
+            cd /home/deploy/mauri-backend
             yarn
             yarn migration
             yarn seed
