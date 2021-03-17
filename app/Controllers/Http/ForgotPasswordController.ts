@@ -8,23 +8,20 @@ import { getErrors } from 'App/Services/MessageErros'
 import { ForgotPasswordSchema } from 'App/Validators'
 
 export default class ForgotPasswordController {
-  private readonly repository
-  constructor () {
-    this.repository = UsersRepository
-  }
+  constructor (private readonly repository = UsersRepository) {}
 
   async store ({ request, response, auth }: HttpContextContract) {
     try {
       await request.validate({schema: ForgotPasswordSchema})
     } catch (error) {
       const msg = getErrors(error)
-      // console.log(error.messages.errors)
       return response
-        .safeHeader('returnType', 'error')
-        .safeHeader('message', 'Validation error')
-        .safeHeader('contentError', msg)
         .status(422)
-        .json({})
+        .json({
+          returnType: 'error',
+          message: 'Erro na validação',
+          messageErrors: msg,
+        })
     }
 
     const { email, name, password } = request.all()
@@ -50,10 +47,12 @@ export default class ForgotPasswordController {
     }
 
     return response
-      .safeHeader('returnType', returnType)
-      .safeHeader('message', message)
-      .safeHeader('contentError', contentError)
       .status(statusCode)
-      .json(data)
+      .json({
+        ...data,
+        returnType,
+        message,
+        contentError,
+      })
   }
 }

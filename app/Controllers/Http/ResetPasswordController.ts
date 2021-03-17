@@ -6,23 +6,20 @@ import { getErrors } from 'App/Services/MessageErros'
 import { ResetPasswordSchema } from 'App/Validators'
 
 export default class ResetPasswordController {
-  private readonly repository
-  constructor () {
-    this.repository = UsersRepository
-  }
+  constructor (private readonly repository = UsersRepository) {}
 
   async store ({ request, response, auth }: HttpContextContract) {
     try {
       await request.validate({schema: ResetPasswordSchema})
     } catch (error) {
       const msg = getErrors(error)
-      // console.log(error.messages.errors)
       return response
-        .safeHeader('returnType', 'error')
-        .safeHeader('message', 'Validation error')
-        .safeHeader('contentError', msg)
         .status(422)
-        .json({})
+        .json({
+          returnType: 'error',
+          message: 'Erro na validação',
+          messageErrors: msg,
+        })
     }
 
     await this.repository.create(request.all())
@@ -35,10 +32,12 @@ export default class ResetPasswordController {
     const token = tokenData?.data?.token ? tokenData.data.token : ''
 
     return response
-      .safeHeader('returnType', returnType)
-      .safeHeader('message', message)
-      .safeHeader('contentError', contentError)
-      .status(204)
-      .json(token.toJSON())
+      .status(422)
+      .json({
+        token: token.toJSON(),
+        returnType,
+        message,
+        contentError,
+      })
   }
 }

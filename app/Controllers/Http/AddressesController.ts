@@ -6,20 +6,19 @@ import { AddressSchema } from 'App/Validators'
 import { AddressSearchSchema } from 'App/Validators/AddressSearchSchema'
 
 export default class AddressesController {
-  private readonly repository
-  constructor () {
-    this.repository = AddressesRepository
-  }
+  constructor (private readonly repository = AddressesRepository) {}
 
   async index ({ response }: HttpContextContract) {
     const register = await this.repository.all()
     const { data, statusCode, returnType, message, contentError } = register
     return response
-      .safeHeader('returnType', returnType)
-      .safeHeader('message', message)
-      .safeHeader('contentError', contentError)
       .status(statusCode)
-      .json(data)
+      .json({
+        ...data,
+        returnType,
+        message,
+        contentError,
+      })
   }
 
   async store ({ request, response }: HttpContextContract) {
@@ -27,34 +26,38 @@ export default class AddressesController {
       await request.validate({schema: AddressSchema})
     } catch (error) {
       const msg = getErrors(error)
-      // console.log(error.messages.errors)
       return response
-        .safeHeader('returnType', 'error')
-        .safeHeader('message', 'Validation error')
-        .safeHeader('contentError', msg)
         .status(422)
-        .json({})
+        .json({
+          returnType: 'error',
+          message: 'Erro na validação',
+          messageErrors: msg,
+        })
     }
 
     const register = await this.repository.create(request.all())
     const { data, statusCode, returnType, message, contentError } = register
     return response
-      .safeHeader('returnType', returnType)
-      .safeHeader('message', message)
-      .safeHeader('contentError', contentError)
       .status(statusCode)
-      .json(data)
+      .json({
+        ...data,
+        returnType,
+        message,
+        contentError,
+      })
   }
 
   async show ({ params, response }: HttpContextContract) {
     const register = await this.repository.find(params.id)
     const { data, statusCode, returnType, message, contentError } = register
     return response
-      .safeHeader('returnType', returnType)
-      .safeHeader('message', message)
-      .safeHeader('contentError', contentError)
       .status(statusCode)
-      .json(data)
+      .json({
+        ...data,
+        returnType,
+        message,
+        contentError,
+      })
   }
 
   async search ({ request, response }: HttpContextContract) {
@@ -62,23 +65,25 @@ export default class AddressesController {
       await request.validate({schema: AddressSearchSchema})
     } catch (error) {
       const msg = getErrors(error)
-      // console.log(error.messages.errors)
       return response
-        .safeHeader('returnType', 'error')
-        .safeHeader('message', 'Validation error')
-        .safeHeader('contentError', msg)
         .status(422)
-        .json({})
+        .json({
+          returnType: 'error',
+          message: 'Erro na validação',
+          messageErrors: msg,
+        })
     }
 
     const register = await this.repository.search(request.all())
     const { data, statusCode, returnType, message, contentError } = register
     return response
-      .safeHeader('returnType', returnType)
-      .safeHeader('message', message)
-      .safeHeader('contentError', contentError)
       .status(statusCode)
-      .json(data)
+      .json({
+        ...data,
+        returnType,
+        message,
+        contentError,
+      })
   }
 
   async update ({ params, request, response }: HttpContextContract) {
@@ -87,31 +92,36 @@ export default class AddressesController {
     } catch (error) {
       const msg = getErrors(error)
       return response
-        .safeHeader('returnType', 'error')
-        .safeHeader('message', 'Validation error')
-        .safeHeader('contentError', msg)
         .status(422)
-        .json({})
+        .json({
+          returnType: 'error',
+          message: 'Erro na validação',
+          messageErrors: msg,
+        })
     }
 
     const register = await this.repository.findAndUpdate(params.id, request.all())
     const { data, statusCode, returnType, message, contentError } = register
     return response
-      .safeHeader('returnType', returnType)
-      .safeHeader('message', message)
-      .safeHeader('contentError', contentError)
       .status(statusCode)
-      .json(data)
+      .json({
+        ...data,
+        returnType,
+        message,
+        contentError,
+      })
   }
 
   async destroy ({ params, response }: HttpContextContract) {
     const register = await this.repository.findAndDelete(params.id)
     const { data, statusCode, returnType, message, contentError } = register
     return response
-      .safeHeader('returnType', returnType)
-      .safeHeader('message', message)
-      .safeHeader('contentError', contentError)
       .status(statusCode)
-      .json(data)
+      .json({
+        ...data,
+        returnType,
+        message,
+        contentError,
+      })
   }
 }
