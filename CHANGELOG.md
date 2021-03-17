@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.11.0](https://github.com/EmersonBraun/mauri-backend/compare/v0.10.1...v0.11.0) (2021-03-17)
+
+
+### Features
+
+* refactor controllers ([32a0155](https://github.com/EmersonBraun/mauri-backend/commit/32a0155a91b977fa2a8331640baf585243560e11))
+
 ### [0.10.1](https://github.com/EmersonBraun/mauri-backend/compare/v0.10.0...v0.10.1) (2021-01-28)
 
 
