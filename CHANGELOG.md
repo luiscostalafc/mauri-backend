@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## 0.12.0 (2021-03-18)
+
+
+### Features
+
+* refactor all project ([5132729](https://github.com/EmersonBraun/mauri-backend/commit/5132729d2ec19aef679ad8b36bd4076c5a4e8c9d))
+
 ## [0.11.0](https://github.com/EmersonBraun/mauri-backend/compare/v0.10.1...v0.11.0) (2021-03-17)
 
 
