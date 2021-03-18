@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.12.1](https://github.com/EmersonBraun/mauri-backend/compare/v0.12.0...v0.12.1) (2021-03-18)
+
+
+### Features
+
+* add workflows ([f45c27e](https://github.com/EmersonBraun/mauri-backend/commit/f45c27ef27b0f9dddbb80bf9e9a8e269a77565f9))
+
+
+### Bug Fixes
+
+* romove unused services ([01531dd](https://github.com/EmersonBraun/mauri-backend/commit/01531dd8d5622cac63143fb183beee29844e94b5))
+
 ## 0.12.0 (2021-03-18)
 
 
