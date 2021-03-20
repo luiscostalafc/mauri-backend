@@ -5,7 +5,7 @@ import User from './User'
 export default class Phone extends BaseModel {
   @column({ isPrimary: true }) public id: number
   @column() public type: string
-  @column() public area_code: string
+  // @column() public area_code: string
   @column() public phone: string
   @column() public whatsapp: boolean
   @column() public inactive: boolean

@@ -10,8 +10,8 @@ export const AddressSchema = schema.create({
   street: schema.string.optional(),
   number: schema.string.optional(),
   complement: schema.string.optional(),
-  delivery: schema.boolean(),
-  inactive: schema.boolean(),
+  delivery: schema.boolean.optional(),
+  inactive: schema.boolean.optional(),
   user_id: schema.number([
     rules.exists({ table: 'users', column: 'id' }),
   ]),

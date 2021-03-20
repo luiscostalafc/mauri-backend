@@ -1,11 +1,27 @@
 import Logger from '@ioc:Adonis/Core/Logger'
-import { getSatusCode, getHappen, getMessage } from './ResponseUtils'
+import { getHappen, getMessage, getSatusCode } from './ResponseUtils'
 
-let data = []
+let data: any
 let statusCode = 400
 let message = ''
 let returnType = 'error'
 let contentError = []
+let response: Model
+
+declare interface Model {
+  $attributes: any
+  $columns: any
+  $extras: any
+  $isDeleted: boolean
+  $isLocal: boolean
+  $isPersisted: boolean
+  $original: any
+  $preloaded: any
+  $sideloaded: any
+  cachedGetters: any
+  fillInvoked: boolean
+  serialize: () => any
+}
 
 export async function logError (func: string, error: any) {
   Logger.warn(`Repository ${func} Error: ${error}`)
@@ -13,7 +29,7 @@ export async function logError (func: string, error: any) {
 
 export async function first (Model) {
   try{
-    data = await Model.first()
+    response = await Model.first()
   } catch(error) {
     logError('first', error)
     contentError = error
@@ -22,13 +38,15 @@ export async function first (Model) {
   statusCode = getSatusCode(contentError, 'load')
   returnType = getHappen(statusCode)
   message = getMessage('load', statusCode)
-
+  
+  data = response ?? []
   return { data, statusCode, returnType, message, contentError }
 }
 
 export async function all (Model) {
   try{
-    data = await Model.all()
+    response = await Model.all()
+    response = response.serialize()
   } catch(error) {
     logError('all', error)
     contentError = error
@@ -38,12 +56,14 @@ export async function all (Model) {
   returnType = getHappen(statusCode)
   message = getMessage('load', statusCode)
 
+  data = response ?? []
   return { data, statusCode, returnType, message, contentError }
 }
 
 export async function withTrashed (Model) {
   try{
-    data = await Model.where('deleted_at', '<>', null).fetch()
+    response = await Model.where('deleted_at', '<>', null).fetch()
+    response = response.serialize()
   } catch(error) {
     logError('withTrashed', error)
     contentError = error
@@ -53,12 +73,14 @@ export async function withTrashed (Model) {
   returnType = getHappen(statusCode)
   message = getMessage('load', statusCode)
 
+  data = response ?? []
   return { data, statusCode, returnType, message, contentError }
 }
 
 export async function OnlyTrashed (Model) {
   try{
-    data = await Model.where('deleted_at', '<>', null).fetch()
+    response = await Model.where('deleted_at', '<>', null).fetch()
+    response = response.serialize()
   } catch(error) {
     logError('OnlyTrashed', error)
     contentError = error
@@ -68,12 +90,14 @@ export async function OnlyTrashed (Model) {
   returnType = getHappen(statusCode)
   message = getMessage('load', statusCode)
 
+  data = response ?? []
   return { data, statusCode, returnType, message, contentError }
 }
 
 export async function find (Model, id: any) {
   try{
-    data = await Model.find(id)
+    response = await Model.find(id)
+    response = response.serialize()
   } catch(error) {
     logError('find', error)
     contentError = error
@@ -83,12 +107,14 @@ export async function find (Model, id: any) {
   returnType = getHappen(statusCode)
   message = getMessage('found', statusCode)
 
-  return { data:data || {}, statusCode, returnType, message, contentError }
+  data = response.serialize() ?? {}
+  return { data, statusCode, returnType, message, contentError }
 }
 
 export async function findByEmail (Model, email: any) {
   try{
-    data = await Model.find(email)
+    response = await Model.find(email)
+    response = response.serialize()
   } catch(error) {
     logError('find', error)
     contentError = error
@@ -98,12 +124,14 @@ export async function findByEmail (Model, email: any) {
   returnType = getHappen(statusCode)
   message = getMessage('found', statusCode)
 
-  return { data:data || {}, statusCode, returnType, message, contentError }
+  data = response.serialize() ?? {}
+  return { data, statusCode, returnType, message, contentError }
 }
 
 export async function findOrFail (Model, id: any) {
   try{
-    data = await Model.findOrFail(id)
+    response = await Model.findOrFail(id)
+    response = response.serialize()
   } catch(error) {
     logError('findOrFail', error)
     contentError = error
@@ -113,12 +141,14 @@ export async function findOrFail (Model, id: any) {
   returnType = getHappen(statusCode)
   message = getMessage('found', statusCode)
 
+  data = response ?? []
   return { data, statusCode, returnType, message, contentError }
 }
 
 export async function create (Model, body: any) {
   try {
-    data = await Model.create(body)
+    response = await Model.create(body)
+    response = response.serialize()
   } catch (error) {
     logError('create', error)
     contentError = error
@@ -128,12 +158,14 @@ export async function create (Model, body: any) {
   returnType = getHappen(statusCode)
   message = getMessage('create', statusCode)
 
+  data = response ?? []
   return { data, statusCode, returnType, message, contentError }
 }
 
 export async function createOrUpdate (Model, id, body: any) {
   try {
-    data = Model.updateOrCreate({ id } ,body)
+    response = Model.updateOrCreate({ id } ,body)
+    response = response.serialize()
   } catch (error) {
     logError('createOrUpdate', error)
     contentError = error
@@ -143,6 +175,7 @@ export async function createOrUpdate (Model, id, body: any) {
   returnType = getHappen(statusCode)
   message = getMessage('create', statusCode)
 
+  data = response ?? []
   return { data, statusCode, returnType, message, contentError }
 }
 
@@ -159,18 +192,19 @@ export async function findAndUpdate (Model, id: any, body: any) {
   // }
 
   try {
-    data = await Model.query().where('id', id).update(body)
+    response = await Model.query().where('id', id).update(body)
+    response = response.serialize()
   } catch (error) {
     logError('findAndUpdate', error)
     contentError = error
   }
 
-  const returnData = data ? body : []
+  data = response.serialize() ?? {}
   statusCode = contentError.length ? 400 : 200
   returnType = getHappen(statusCode)
   message = getMessage('update', statusCode)
 
-  return { data: returnData, statusCode, returnType, message, contentError }
+  return { data, statusCode, returnType, message, contentError }
 }
 
 export async function findAndDelete (Model, id: any) {
@@ -185,22 +219,24 @@ export async function findAndDelete (Model, id: any) {
   }
 
   try {
-    data = await Model.query().where('id', id).delete()
+    response = await Model.query().where('id', id).delete()
+    response = response.serialize()
   } catch (error) {
     logError('findAndDelete', error)
     contentError = error
   }
-  const returnData = data ? res : {}
+  data = response.serialize() ?? {}
   statusCode = getSatusCode(contentError, 'delete')
   returnType = getHappen(statusCode)
   message = getMessage('delete', statusCode)
 
-  return { data:returnData, statusCode, returnType, message, contentError }
+  return { data, statusCode, returnType, message, contentError }
 }
 
 export async function findAndRestore (Model, id: any) {
   try {
-    data = await Model.findOrFail(id).update({ deleted_at: null })
+    response = await Model.findOrFail(id).update({ deleted_at: null })
+    response = response.serialize()
   } catch (error) {
     logError('findAndRestore', error)
     contentError = error
@@ -210,12 +246,14 @@ export async function findAndRestore (Model, id: any) {
   returnType = getHappen(statusCode)
   message = getMessage('restore', statusCode)
 
+  data = response ?? []
   return { data, statusCode, returnType, message, contentError }
 }
 
 export async function findAndDestroy (Model, id: any) {
   try {
-    data = await Model.findOrFail(id).delete()
+    response = await Model.findOrFail(id).delete()
+    response = response.serialize()
   } catch (error) {
     logError('findAndDestroy', error)
     contentError = error
@@ -225,6 +263,7 @@ export async function findAndDestroy (Model, id: any) {
   returnType = getHappen(statusCode)
   message = getMessage('forceDelete', statusCode)
 
+  data = response ?? []
   return { data, statusCode, returnType, message, contentError }
 }
 
