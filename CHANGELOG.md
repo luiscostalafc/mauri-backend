@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.12.3](https://github.com/EmersonBraun/mauri-backend/compare/v0.12.2...v0.12.3) (2021-03-20)
+
+
+### Bug Fixes
+
+* solve model phone, CRUD response, addressSchema and add migration ([0c56bf9](https://github.com/EmersonBraun/mauri-backend/commit/0c56bf99538ee3de23ab03c9ffe5ef0bec41556e))
+
 ### [0.12.2](https://github.com/EmersonBraun/mauri-backend/compare/v0.12.1...v0.12.2) (2021-03-19)
 
 
