@@ -92,11 +92,12 @@ export default class OperationsController {
     } catch (error) {
       const msg = getErrors(error)
       return response
-        .safeHeader('returnType', 'error')
-        .safeHeader('message', 'Validation error')
-        .safeHeader('contentError', msg)
         .status(422)
-        .json({})
+        .json({
+          returnType: 'error',
+          message: 'Erro na validação',
+          messageErrors: msg,
+        })
     }
 
     const register = await this.repository.findAndUpdate(params.id, request.all())
