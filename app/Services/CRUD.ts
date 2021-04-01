@@ -46,7 +46,7 @@ export async function first (Model) {
 export async function all (Model) {
   try{
     response = await Model.all()
-    response = response.serialize()
+    // response = response.serialize()
   } catch(error) {
     logError('all', error)
     contentError = error
@@ -63,7 +63,7 @@ export async function all (Model) {
 export async function withTrashed (Model) {
   try{
     response = await Model.where('deleted_at', '<>', null).fetch()
-    response = response.serialize()
+    // response = response.serialize()
   } catch(error) {
     logError('withTrashed', error)
     contentError = error
@@ -80,7 +80,7 @@ export async function withTrashed (Model) {
 export async function OnlyTrashed (Model) {
   try{
     response = await Model.where('deleted_at', '<>', null).fetch()
-    response = response.serialize()
+    // response = response.serialize()
   } catch(error) {
     logError('OnlyTrashed', error)
     contentError = error
@@ -97,7 +97,7 @@ export async function OnlyTrashed (Model) {
 export async function find (Model, id: any) {
   try{
     response = await Model.find(id)
-    response = response.serialize()
+    // response = response.serialize()
   } catch(error) {
     logError('find', error)
     contentError = error
@@ -114,7 +114,7 @@ export async function find (Model, id: any) {
 export async function findByEmail (Model, email: any) {
   try{
     response = await Model.find(email)
-    response = response.serialize()
+    // response = response.serialize()
   } catch(error) {
     logError('find', error)
     contentError = error
@@ -131,7 +131,7 @@ export async function findByEmail (Model, email: any) {
 export async function findOrFail (Model, id: any) {
   try{
     response = await Model.findOrFail(id)
-    response = response.serialize()
+    // response = response.serialize()
   } catch(error) {
     logError('findOrFail', error)
     contentError = error
@@ -148,7 +148,7 @@ export async function findOrFail (Model, id: any) {
 export async function create (Model, body: any) {
   try {
     response = await Model.create(body)
-    response = response.serialize()
+    // response = response.serialize()
   } catch (error) {
     logError('create', error)
     contentError = error
@@ -162,10 +162,10 @@ export async function create (Model, body: any) {
   return { data, statusCode, returnType, message, contentError }
 }
 
-export async function createOrUpdate (Model, id, body: any) {
+export async function createOrUpdate (Model, register, body: any) {
   try {
-    response = Model.updateOrCreate({ id } ,body)
-    response = response.serialize()
+    response = Model.updateOrCreate({ ...register } ,body)
+    // response = response.serialize()
   } catch (error) {
     logError('createOrUpdate', error)
     contentError = error
@@ -193,7 +193,7 @@ export async function findAndUpdate (Model, id: any, body: any) {
 
   try {
     response = await Model.query().where('id', id).update(body)
-    response = response.serialize()
+    // response = response.serialize()
   } catch (error) {
     logError('findAndUpdate', error)
     contentError = error
@@ -220,7 +220,7 @@ export async function findAndDelete (Model, id: any) {
 
   try {
     response = await Model.query().where('id', id).delete()
-    response = response.serialize()
+    // response = response.serialize()
   } catch (error) {
     logError('findAndDelete', error)
     contentError = error
@@ -236,7 +236,7 @@ export async function findAndDelete (Model, id: any) {
 export async function findAndRestore (Model, id: any) {
   try {
     response = await Model.findOrFail(id).update({ deleted_at: null })
-    response = response.serialize()
+    // response = response.serialize()
   } catch (error) {
     logError('findAndRestore', error)
     contentError = error
@@ -253,7 +253,7 @@ export async function findAndRestore (Model, id: any) {
 export async function findAndDestroy (Model, id: any) {
   try {
     response = await Model.findOrFail(id).delete()
-    response = response.serialize()
+    // response = response.serialize()
   } catch (error) {
     logError('findAndDestroy', error)
     contentError = error

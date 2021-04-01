@@ -49,8 +49,8 @@ class OrderDatailsRepository {
     return await create(this.model, data)
   }
 
-  async createOrUpdate (id: any, data: any) {
-    return await createOrUpdate(this.model, id, data)
+  async createOrUpdate (register: any, data: any) {
+    return await createOrUpdate(this.model, register, data)
   }
 
   async findAndUpdate (id: any, data: any) {

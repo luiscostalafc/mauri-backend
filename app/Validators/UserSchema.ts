@@ -1,4 +1,4 @@
-import { schema, rules } from '@ioc:Adonis/Core/Validator'
+import { rules, schema } from '@ioc:Adonis/Core/Validator'
 
 export const UserSchema = schema.create({
   name: schema.string(),
@@ -8,7 +8,6 @@ export const UserSchema = schema.create({
   complete_name: schema.string.optional(),
   email: schema.string({}, [
     rules.email(),
-    rules.unique({ table: 'users', column: 'email' }),
   ]),
   rg: schema.string(),
   cpf_cnpj: schema.string(),

@@ -158,9 +158,9 @@ class ProductsRepository {
     return await create(this.model, data)
   }
 
-  async createOrUpdate (id: any, data: any) {
+  async createOrUpdate (register: any, data: any) {
     data = this.castValues(data)
-    return await createOrUpdate(this.model, id, data)
+    return await createOrUpdate(this.model, register, data)
   }
 
   async findAndUpdate (id: any, data: any) {

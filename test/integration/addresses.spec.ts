@@ -1,7 +1,7 @@
 import Database from '@ioc:Adonis/Lucid/Database'
 import test from 'japa'
 import supertest from 'supertest'
-import { fakeAddress } from '../../database/factories'
+import { fakeAddress, randomAddressId } from '../../database/factories'
 import { BASE_URL, responseData } from '../utils'
 
 const MODULE = '/api/addresses'
@@ -36,16 +36,16 @@ test.group('Addresses', (group) => {
     assert.isNotEmpty(responseData(text))
   })
   test('GET ensure show', async (assert) => {
-
+    const ID = await randomAddressId()
     const { text } = await supertest(BASE_URL)
-      .get(`${MODULE}/1`)
+      .get(`${MODULE}/${ID}`)
       .expect('Content-Type', /json/)
       .expect(200)
 
     assert.isNotEmpty(text)
   })
   test('POST ensure search', async (assert) => {
-
+    const ID = await randomAddressId()
     const { text } = await supertest(BASE_URL)
       .post(`${MODULE}/search`)
       .send({ id: 1 })
@@ -55,9 +55,9 @@ test.group('Addresses', (group) => {
     assert.isNotEmpty(text)
   })
   test('PUT ensure update', async (assert) => {
-
+    const ID = await randomAddressId()
     const { text } = await supertest(BASE_URL)
-      .put(`${MODULE}/1`)
+      .put(`${MODULE}/${ID}`)
       .send(await fakeAddress())
       .expect('Content-Type', /json/)
       .expect(200)
@@ -65,9 +65,9 @@ test.group('Addresses', (group) => {
     assert.isNotEmpty(text)
   })
   test('DELETE ensure delete', async (assert) => {
-
+    const ID = await randomAddressId()
     const { text } = await supertest(BASE_URL)
-      .delete(`${MODULE}/1`)
+      .delete(`${MODULE}/${ID}`)
       .expect('Content-Type', /json/)
       .expect(200)
 

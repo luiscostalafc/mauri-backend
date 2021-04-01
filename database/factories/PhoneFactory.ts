@@ -7,7 +7,6 @@ export const PhoneFactory = Factory
   .define(Phone, async ({ faker }) => ({
     user_id: await randomUserId(),
     type: faker.random.arrayElement(['celular', 'fixo', 'comercial', 'contato']),
-    area_code: String(faker.random.number(99)),
     phone: faker.phone.phoneNumber(),
     whatsapp: faker.random.boolean(),
     inactive: faker.random.boolean(),
@@ -28,7 +27,6 @@ export const fakePhone = async () => ({
   user_id: await randomUserId(),
   type: faker.random.arrayElement(['celular', 'fixo', 'comercial', 'contato']),
   area_code: String(faker.random.number(99)),
-  phone: faker.phone.phoneNumber(),
   whatsapp: faker.random.boolean(),
   inactive: faker.random.boolean(),
   obs: faker.lorem.words(5),

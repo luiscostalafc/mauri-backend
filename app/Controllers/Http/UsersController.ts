@@ -35,7 +35,7 @@ export default class UsersController {
         })
     }
 
-    const register = await this.repository.create(request.all())
+    const register = await this.repository.createOrUpdate({ email: request.input('email') }, request.all())
     const { data, statusCode, returnType, message, contentError } = register
     return response
       .status(statusCode)
