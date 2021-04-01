@@ -45,7 +45,6 @@ test.group('Addresses', (group) => {
     assert.isNotEmpty(text)
   })
   test('POST ensure search', async (assert) => {
-    const ID = await randomAddressId()
     const { text } = await supertest(BASE_URL)
       .post(`${MODULE}/search`)
       .send({ id: 1 })
