@@ -158,7 +158,7 @@ export async function create (Model, body: any) {
   returnType = getHappen(statusCode)
   message = getMessage('create', statusCode)
 
-  data = response ?? []
+  data = response["$attributes"] ?? []
   return { data, statusCode, returnType, message, contentError }
 }
 
@@ -192,14 +192,15 @@ export async function findAndUpdate (Model, id: any, body: any) {
   // }
 
   try {
-    response = await Model.query().where('id', id).update(body)
+    await Model.query().where('id', id).update(body)
     // response = response.serialize()
   } catch (error) {
     logError('findAndUpdate', error)
     contentError = error
   }
-
-  data = response.serialize() ?? {}
+  const { data: response } = await find(Model, id)
+  console.log(response)
+  data = response ?? {}
   statusCode = contentError.length ? 400 : 200
   returnType = getHappen(statusCode)
   message = getMessage('update', statusCode)
@@ -208,28 +209,27 @@ export async function findAndUpdate (Model, id: any, body: any) {
 }
 
 export async function findAndDelete (Model, id: any) {
-  const res = await Model.query().where('id', id)
+  const res = await Model.query().where('id', id).first()
 
-  if(!res.length) {
+  if(!res) {
     statusCode = 404
     returnType = getHappen(statusCode)
     message = getMessage('found', statusCode)
-
+    
     return { data: {}, statusCode, returnType, message, contentError }
   }
-
+  
   try {
     response = await Model.query().where('id', id).delete()
-    // response = response.serialize()
   } catch (error) {
     logError('findAndDelete', error)
     contentError = error
   }
-  data = response.serialize() ?? {}
+
   statusCode = getSatusCode(contentError, 'delete')
   returnType = getHappen(statusCode)
   message = getMessage('delete', statusCode)
-
+  data = res["$attributes"] ?? {}
   return { data, statusCode, returnType, message, contentError }
 }
 
