@@ -3,6 +3,7 @@ import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import ProductsRepository from 'App/Repositories/ProductsRepository'
 import { getErrors } from 'App/Services/MessageErros'
 import { ProductSchema } from 'App/Validators'
+import { ProductDistinctSchema } from 'App/Validators/ProductDistinctSchema'
 import { ProductSearchSchema } from 'App/Validators/ProductSearchSchema'
 
 export default class ProductsController {
@@ -69,6 +70,32 @@ export default class ProductsController {
     }
 
     const register = await this.repository.search(request.all())
+    const { data, statusCode, returnType, message, contentError } = register
+    return response
+      .status(statusCode)
+      .json({
+        ...data,
+        returnType,
+        message,
+        contentError,
+      })
+  }
+
+  async distinct ({ request, response }: HttpContextContract) {
+    try {
+      await request.validate({schema: ProductDistinctSchema})
+    } catch (error) {
+      const msg = getErrors(error)
+      return response
+        .status(422)
+        .json({
+          returnType: 'error',
+          message: 'Erro na validação',
+          messageErrors: msg,
+        })
+    }
+
+    const register = await this.repository.distinct(request.input('name'))
     const { data, statusCode, returnType, message, contentError } = register
     return response
       .status(statusCode)

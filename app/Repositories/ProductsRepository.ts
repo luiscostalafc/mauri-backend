@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-member-accessibility */
 import Logger from '@ioc:Adonis/Core/Logger'
+import Database from '@ioc:Adonis/Lucid/Database'
 import Group from 'App/Models/Group'
 import Product from 'App/Models/Product'
 import Subgroup from 'App/Models/Subgroup'
@@ -74,6 +75,25 @@ class ProductsRepository {
     }
 
     return mountResponse(data, contentError, 'load')
+  }
+
+  async distinct (name) {
+    const stringName = Object.values(name).join('')
+    let contentError = ''
+    let data: any
+    try{
+      data = await Database.rawQuery(`SELECT DISTINCT(${stringName}) FROM products`)
+    } catch(error) {
+      console.log(error)
+      contentError = error
+    }
+
+    const clearData = !data?.rows ? [] : data.rows.map((d) => ({
+      label: d[stringName],
+      value: d[stringName]
+    }))
+
+    return mountResponse({data: clearData}, contentError, 'load')
   }
 
   async find (id: any) {

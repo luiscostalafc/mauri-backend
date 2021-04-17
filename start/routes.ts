@@ -52,6 +52,7 @@ Route
     Route.post('phones/search','PhonesController.search')
     Route.resource('phones','PhonesController').apiOnly()
     Route.post('products/search','ProductsController.search')
+    Route.post('products/distinct','ProductsController.distinct')
     Route.post('products/excel','ProductsController.excel')
     Route.resource('products','ProductsController').apiOnly()
     Route.post('product-asingment/search','ProductAsingmentsController.search')
