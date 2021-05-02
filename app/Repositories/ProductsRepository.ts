@@ -6,7 +6,7 @@ import Product from 'App/Models/Product'
 import Subgroup from 'App/Models/Subgroup'
 import Synonym from 'App/Models/Synonym'
 import { mountResponse } from 'App/Services/ResponseUtils'
-import { all, create, createOrUpdate, find, findAndDelete, findAndUpdate, first } from '../Services/CRUD'
+import { all, first } from '../Services/CRUD'
 
 type Excel = Array<{
   0: string,
@@ -77,12 +77,35 @@ class ProductsRepository {
     return mountResponse(data, contentError, 'load')
   }
 
-  async distinct (name) {
+  getValueByOperator (operator, value) {
+    if (operator === '%') return `%${value}%`
+    if (operator === '=') return value
+  }
+
+  getRestrictionQuery (restrictions) {
+    const operators = {
+      "%": 'LIKE',
+      "=": '='
+    }
+    let res = ''
+    restrictions.forEach(({ name, operator, value}, index) => {
+      const where = index === 0 ? 'WHERE' : 'AND'
+      res += `${where} ${name} ${operators[operator]} '${this.getValueByOperator(operator, value)}'` 
+    });
+    console.log({res})
+    return res
+  }
+  
+  async distinct (name, restrictions) {
     const stringName = Object.values(name).join('')
+    let restriction = ''
+    if (restrictions.length) {
+      restriction = this.getRestrictionQuery(restrictions)
+    }
     let contentError = ''
     let data: any
     try{
-      data = await Database.rawQuery(`SELECT DISTINCT(${stringName}) FROM products`)
+      data = await Database.rawQuery(`SELECT DISTINCT(${stringName}) FROM products ${restriction}`)
     } catch(error) {
       console.log(error)
       contentError = error

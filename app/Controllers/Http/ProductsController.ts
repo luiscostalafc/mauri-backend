@@ -94,8 +94,8 @@ export default class ProductsController {
           messageErrors: msg,
         })
     }
-
-    const register = await this.repository.distinct(request.input('name'))
+    const {name, restrictions} = request.all()
+    const register = await this.repository.distinct(name, restrictions)
     const { data, statusCode, returnType, message, contentError } = register
     return response
       .status(statusCode)
