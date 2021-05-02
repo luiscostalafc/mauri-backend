@@ -6,7 +6,7 @@ import Product from 'App/Models/Product'
 import Subgroup from 'App/Models/Subgroup'
 import Synonym from 'App/Models/Synonym'
 import { mountResponse } from 'App/Services/ResponseUtils'
-import { all, first } from '../Services/CRUD'
+import { all, create, createOrUpdate, find, findAndDelete, findAndUpdate, first } from '../Services/CRUD'
 
 type Excel = Array<{
   0: string,
