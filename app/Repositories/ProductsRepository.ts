@@ -92,7 +92,6 @@ class ProductsRepository {
       const where = index === 0 ? 'WHERE' : 'AND'
       res += `${where} ${name} ${operators[operator]} '${this.getValueByOperator(operator, value)}'` 
     });
-    console.log({res})
     return res
   }
   
