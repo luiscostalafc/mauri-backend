@@ -1,6 +1,6 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import UsersRepository from 'App/Repositories/UsersRepository'
-import { getErrors } from 'App/Services/MessageErros'
+import { errorResponse, validationError } from 'App/Services/ResponseUtils'
 import { AuthSchema } from 'App/Validators/AuthSchema'
 
 export default class AuthController {
@@ -10,14 +10,9 @@ export default class AuthController {
     try {
       await request.validate({schema: AuthSchema})
     } catch (error) {
-      const msg = getErrors(error)
       return response
         .status(422)
-        .json({
-          returnType: 'error',
-          message: 'Erro na validação',
-          messageErrors: msg,
-        })
+        .json(validationError(error))
     }
 
     const email = request.input('email')
@@ -49,14 +44,12 @@ export default class AuthController {
           contentError: [],
         })
     } catch (error) {
-      const msg = getErrors(error)
       return response
-        .status(422)
-        .json({
-          returnType: 'error',
+        .status(400)
+        .json(errorResponse({
           message: 'Erro na para fazer o deslog',
-          messageErrors: msg,
-        })
+          error,
+        }))
     }
   }
 }

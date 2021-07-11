@@ -2,7 +2,7 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import UsersRepository from 'App/Repositories/UsersRepository'
 import { getToken } from 'App/Services/auth'
-import { getErrors } from 'App/Services/MessageErros'
+import { getResponseInfo, validationError } from 'App/Services/ResponseUtils'
 import { ResetPasswordSchema } from 'App/Validators'
 
 export default class ResetPasswordController {
@@ -12,32 +12,28 @@ export default class ResetPasswordController {
     try {
       await request.validate({schema: ResetPasswordSchema})
     } catch (error) {
-      const msg = getErrors(error)
       return response
         .status(422)
-        .json({
-          returnType: 'error',
-          message: 'Erro na validação',
-          messageErrors: msg,
-        })
+        .json(validationError(error))
     }
 
     await this.repository.create(request.all())
     const { email, password } = request.all()
 
-    const reqUser = await this.repository.findByEmail(email)
-    const { returnType, message, contentError } = reqUser
+    const register = await this.repository.findByEmail(email)
 
-    const tokenData = await getToken(email, password, auth)
-    const token = tokenData?.data?.token ? tokenData.data.token : ''
+    const { data } = await getToken(email, password, auth)
+    const token = data?.token ?? ''
 
     return response
-      .status(422)
+      .status(register.statusCode)
       .json({
         token: token.toJSON(),
-        returnType,
-        message,
-        contentError,
+        info: getResponseInfo({
+          contentError: register.info.contentError,
+          statusCode: register.statusCode,
+          typeFunction: "load"
+        })
       })
   }
 }

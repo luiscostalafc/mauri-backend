@@ -4,7 +4,7 @@ import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import UsersRepository from 'App/Repositories/UsersRepository'
 import { getToken } from 'App/Services/auth'
 import { sendMail } from 'App/Services/MailService'
-import { getErrors } from 'App/Services/MessageErros'
+import { validationError } from 'App/Services/ResponseUtils'
 import { ForgotPasswordSchema } from 'App/Validators'
 
 export default class ForgotPasswordController {
@@ -14,25 +14,19 @@ export default class ForgotPasswordController {
     try {
       await request.validate({schema: ForgotPasswordSchema})
     } catch (error) {
-      const msg = getErrors(error)
       return response
         .status(422)
-        .json({
-          returnType: 'error',
-          message: 'Erro na validação',
-          messageErrors: msg,
-        })
+        .json(validationError(error))
     }
 
     const { email, name, password } = request.all()
 
-    const reqUser = await this.repository.findByEmail(email)
-    const { data, statusCode, returnType, message, contentError } = reqUser
+    const register = await this.repository.findByEmail(email)
 
-    const tokenData = await getToken(email, password, auth)
-    const token = tokenData?.data?.token ? tokenData.data.token : ''
+    const { data } = await getToken(email, password, auth)
+    const token = data?.token ?? ''
 
-    if (returnType === 'success') {
+    if (register?.data?.length) {
       const baseUrl = Env.get('APP_WEB_URL') as string
       const link = `${baseUrl}/sign-up-activate?token=${token}`
       await sendMail({
@@ -47,12 +41,7 @@ export default class ForgotPasswordController {
     }
 
     return response
-      .status(statusCode)
-      .json({
-        ...data,
-        returnType,
-        message,
-        contentError,
-      })
+      .status(register.statusCode)
+      .json(register)
   }
 }

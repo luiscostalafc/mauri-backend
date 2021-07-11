@@ -1,4 +1,5 @@
 export const getErrors = (error: { messages: { errors: any[] } }) => {
+  if(typeof error === 'string') return error
   return error.messages.errors.map(e => {
     const rule = getRule(e.rule)
     return { path: e.field, message: rule }

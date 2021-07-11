@@ -1,16 +1,49 @@
 /* eslint-disable @typescript-eslint/explicit-member-accessibility */
 import transations from '../../config/transations'
+import { getErrors } from './MessageErros'
 export type TypeFunction = 'login'|'load'|'found'|'create'|'update'|'delete' |'restore'|'forceDelete'
 
-export function mountResponse (data, contentError, typeFunction: TypeFunction) {
-  const statusCode = getSatusCode(contentError, typeFunction)
-  const returnType = getHappen(statusCode)
-  const message = getMessage(typeFunction, statusCode)
+export const notFound = () => ({
+  data: [],
+  statusCode: 404,
+  info: { statusCode: 404, returnType: "error", message: "Not Found", contentError: "Not Found"}
+})
 
-  return { data, statusCode, returnType, message, contentError }
+export const errorResponse = ({message, error, statusCode = 400}) => ({
+  data: [],
+  statusCode,
+  info: { statusCode, returnType: "error", message, contentError: getErrors(error)}
+})
+
+export const validationError = (error) => ({
+  data: [],
+  statusCode: 422,
+  info: { statusCode: 422, returnType: "error", message: "Erro na validação", contentError: getErrors(error)}
+})
+
+export const getResponseInfo = ({contentError, statusCode, typeFunction}) => {
+  const code = statusCode ?? getStatusCode(contentError, typeFunction)
+  return {
+    statusCode: code,
+    returnType: getHappen(code),
+    message: getMessage(typeFunction, code),
+    contentError: getErrors(contentError)
+  }
 }
 
-export function getSatusCode (contentError: any, typeFunction: TypeFunction): number {
+export function mountResponse (data, contentError, typeFunction: TypeFunction) {
+  const statusCode = getStatusCode(contentError, typeFunction)
+
+  return {
+    statusCode,
+    data: getData(data),
+    info: getResponseInfo({contentError, statusCode, typeFunction})
+  }
+}
+
+export const getData = (data) => data ?? []
+
+export function getStatusCode (contentError: any, typeFunction: TypeFunction): number {
   if (typeFunction === 'create') {
     return !contentError.length ? 201 : 400
   }
