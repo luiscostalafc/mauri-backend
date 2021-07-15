@@ -32,7 +32,7 @@ test.group('Addresses', (group) => {
       .send(await fakeAddress())
       .expect('Content-Type', /json/)
       .expect(201)
-
+    console.log(text)
     assert.isNotEmpty(responseData(text))
   })
   test('GET ensure show', async (assert) => {

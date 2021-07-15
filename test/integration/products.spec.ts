@@ -1,4 +1,5 @@
 import Database from '@ioc:Adonis/Lucid/Database'
+import Product from 'App/Models/Product'
 import test from 'japa'
 import supertest from 'supertest'
 import { fakeProduct } from '../../database/factories'
@@ -65,9 +66,9 @@ test.group('Product', (group) => {
     assert.isNotEmpty(text)
   })
   test('DELETE ensure delete', async (assert) => {
-
+    const { id } = await Product.create(await fakeProduct())
     const { text } = await supertest(BASE_URL)
-      .delete(`${MODULE}/1`)
+      .delete(`${MODULE}/${id}`)
       .expect('Content-Type', /json/)
       .expect(200)
 

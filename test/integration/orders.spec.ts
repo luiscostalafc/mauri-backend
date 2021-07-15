@@ -1,7 +1,7 @@
 import Database from '@ioc:Adonis/Lucid/Database'
 import test from 'japa'
 import supertest from 'supertest'
-import { fakeOrder } from '../../database/factories'
+import { fakeOrder, randomOrderId } from '../../database/factories'
 import { BASE_URL, responseData } from '../utils'
 
 const MODULE = '/api/orders'
@@ -56,10 +56,11 @@ test.group('Orders', (group) => {
     assert.isNotEmpty(text)
   })
   test('PUT ensure update', async (assert) => {
-
+    const id = await randomOrderId()
+    const data = await fakeOrder()
     const { text } = await supertest(BASE_URL)
-      .put(`${MODULE}/1`)
-      .send(await fakeOrder())
+      .put(`${MODULE}/${id}`)
+      .send(data)
       .expect('Content-Type', /json/)
       .expect(200)
 
