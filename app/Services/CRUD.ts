@@ -1,12 +1,5 @@
 import Logger from '@ioc:Adonis/Core/Logger'
-import { getHappen, getMessage, getSatusCode } from './ResponseUtils'
-
-let data: any
-let statusCode = 400
-let message = ''
-let returnType = 'error'
-let contentError = []
-let response: Model
+import { mountResponse, notFound } from './ResponseUtils'
 
 declare interface Model {
   $attributes: any
@@ -28,242 +21,175 @@ export async function logError (func: string, error: any) {
 }
 
 export async function first (Model) {
+  let data = [], contentError = ""
   try{
-    response = await Model.first()
+    data = await Model.first()
   } catch(error) {
     logError('first', error)
     contentError = error
   }
 
-  statusCode = getSatusCode(contentError, 'load')
-  returnType = getHappen(statusCode)
-  message = getMessage('load', statusCode)
-  
-  data = response ?? []
-  return { data, statusCode, returnType, message, contentError }
+  return mountResponse(data, contentError, "load")
 }
 
 export async function all (Model) {
+  let data = [], contentError = ""
   try{
-    response = await Model.all()
+    data = await Model.all()
     // response = response.serialize()
   } catch(error) {
     logError('all', error)
     contentError = error
   }
 
-  statusCode = getSatusCode(contentError, 'load')
-  returnType = getHappen(statusCode)
-  message = getMessage('load', statusCode)
-
-  data = response ?? []
-  return { data, statusCode, returnType, message, contentError }
+  return mountResponse(data, contentError, "load")
 }
 
 export async function withTrashed (Model) {
+  let data = [], contentError = ""
   try{
-    response = await Model.where('deleted_at', '<>', null).fetch()
+    data = await Model.where('deleted_at', '<>', null).fetch()
     // response = response.serialize()
   } catch(error) {
     logError('withTrashed', error)
     contentError = error
   }
 
-  statusCode = getSatusCode(contentError, 'load')
-  returnType = getHappen(statusCode)
-  message = getMessage('load', statusCode)
-
-  data = response ?? []
-  return { data, statusCode, returnType, message, contentError }
+  return mountResponse(data, contentError, "load")
 }
 
 export async function OnlyTrashed (Model) {
+  let data = [], contentError = ""
   try{
-    response = await Model.where('deleted_at', '<>', null).fetch()
+    data = await Model.where('deleted_at', '<>', null).fetch()
     // response = response.serialize()
   } catch(error) {
     logError('OnlyTrashed', error)
     contentError = error
   }
 
-  statusCode = getSatusCode(contentError, 'load')
-  returnType = getHappen(statusCode)
-  message = getMessage('load', statusCode)
-
-  data = response ?? []
-  return { data, statusCode, returnType, message, contentError }
+  return mountResponse(data, contentError, "load")
 }
 
 export async function find (Model, id: any) {
+  let data = [], contentError = ""
   try{
-    response = await Model.find(id)
+    data = await Model.find(id)
     // response = response.serialize()
   } catch(error) {
     logError('find', error)
     contentError = error
   }
 
-  statusCode = data ? 200 : 404
-  returnType = getHappen(statusCode)
-  message = getMessage('found', statusCode)
-
-  data = response.serialize() ?? {}
-  return { data, statusCode, returnType, message, contentError }
+  return mountResponse(data, contentError, "found")
 }
 
 export async function findByEmail (Model, email: any) {
+  let data = [], contentError = ""
   try{
-    response = await Model.find(email)
+    data = await Model.find(email)
     // response = response.serialize()
   } catch(error) {
     logError('find', error)
     contentError = error
   }
 
-  statusCode = data ? 200 : 404
-  returnType = getHappen(statusCode)
-  message = getMessage('found', statusCode)
-
-  data = response.serialize() ?? {}
-  return { data, statusCode, returnType, message, contentError }
+  return mountResponse(data, contentError, "found")
 }
 
 export async function findOrFail (Model, id: any) {
+  let data = [], contentError = ""
   try{
-    response = await Model.findOrFail(id)
+    data = await Model.findOrFail(id)
     // response = response.serialize()
   } catch(error) {
     logError('findOrFail', error)
     contentError = error
   }
 
-  statusCode = getSatusCode(contentError, 'found')
-  returnType = getHappen(statusCode)
-  message = getMessage('found', statusCode)
-
-  data = response ?? []
-  return { data, statusCode, returnType, message, contentError }
+  return mountResponse(data, contentError, "found")
 }
 
 export async function create (Model, body: any) {
+  let data = [], contentError = ""
   try {
-    response = await Model.create(body)
+    data = await Model.create(body)
     // response = response.serialize()
   } catch (error) {
     logError('create', error)
     contentError = error
   }
 
-  statusCode = getSatusCode(contentError, 'create')
-  returnType = getHappen(statusCode)
-  message = getMessage('create', statusCode)
-
-  data = response["$attributes"] ?? []
-  return { data, statusCode, returnType, message, contentError }
+  data = data["$attributes"] ?? []
+  return mountResponse(data, contentError, "create")
 }
 
 export async function createOrUpdate (Model, register, body: any) {
+  let data = [], contentError = ""
   try {
-    response = Model.updateOrCreate({ ...register } ,body)
+    data = Model.updateOrCreate({ ...register } ,body)
     // response = response.serialize()
   } catch (error) {
     logError('createOrUpdate', error)
     contentError = error
   }
 
-  statusCode = getSatusCode(contentError, 'create')
-  returnType = getHappen(statusCode)
-  message = getMessage('create', statusCode)
-
-  data = response ?? []
-  return { data, statusCode, returnType, message, contentError }
+  return mountResponse(data, contentError, "create")
 }
 
 export async function findAndUpdate (Model, id: any, body: any) {
-  let contentError = ''
-  // const res = await Model.query().where('id', id)
-
-  // if(!res.length) {
-  //   statusCode = 404
-  //   returnType = getHappen(statusCode)
-  //   message = getMessage('found', statusCode)
-
-  //   return { data: {}, statusCode, returnType, message, contentError }
-  // }
+  let data = [], contentError = ""
 
   try {
     await Model.query().where('id', id).update(body)
-    // response = response.serialize()
   } catch (error) {
     logError('findAndUpdate', error)
     contentError = error
   }
   const { data: response } = await find(Model, id)
-  console.log(response)
   data = response ?? {}
-  statusCode = contentError.length ? 400 : 200
-  returnType = getHappen(statusCode)
-  message = getMessage('update', statusCode)
 
-  return { data, statusCode, returnType, message, contentError }
+  return mountResponse(data, contentError, "update")
 }
 
 export async function findAndDelete (Model, id: any) {
+  let data = [], contentError = ""
   const res = await Model.query().where('id', id).first()
 
-  if(!res) {
-    statusCode = 404
-    returnType = getHappen(statusCode)
-    message = getMessage('found', statusCode)
-    
-    return { data: {}, statusCode, returnType, message, contentError }
-  }
+  if(!res) return notFound()
   
   try {
-    response = await Model.query().where('id', id).delete()
+    data = await Model.query().where('id', id).delete()
   } catch (error) {
     logError('findAndDelete', error)
     contentError = error
   }
 
-  statusCode = getSatusCode(contentError, 'delete')
-  returnType = getHappen(statusCode)
-  message = getMessage('delete', statusCode)
   data = res["$attributes"] ?? {}
-  return { data, statusCode, returnType, message, contentError }
+  return mountResponse(data, contentError, "delete")
 }
 
 export async function findAndRestore (Model, id: any) {
+  let data = [], contentError = ""
   try {
-    response = await Model.findOrFail(id).update({ deleted_at: null })
-    // response = response.serialize()
+    data = await Model.findOrFail(id).update({ deleted_at: null })
   } catch (error) {
     logError('findAndRestore', error)
     contentError = error
   }
 
-  statusCode = getSatusCode(contentError, 'restore')
-  returnType = getHappen(statusCode)
-  message = getMessage('restore', statusCode)
-
-  data = response ?? []
-  return { data, statusCode, returnType, message, contentError }
+  return mountResponse(data, contentError, "restore")
 }
 
 export async function findAndDestroy (Model, id: any) {
+  let data = [], contentError = ""
   try {
-    response = await Model.findOrFail(id).delete()
-    // response = response.serialize()
+    data = await Model.findOrFail(id).delete()
   } catch (error) {
     logError('findAndDestroy', error)
     contentError = error
   }
 
-  statusCode = getSatusCode(contentError, 'forceDelete')
-  returnType = getHappen(statusCode)
-  message = getMessage('forceDelete', statusCode)
-
-  data = response ?? []
-  return { data, statusCode, returnType, message, contentError }
+  return mountResponse(data, contentError, "forceDelete")
 }
 

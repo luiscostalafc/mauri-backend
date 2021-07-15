@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.0.0](https://github.com/EmersonBraun/mauri-backend/compare/v0.12.4...v1.0.0) (2021-07-11)
+
+
+### Features
+
+* add deploy.sh ([ca67872](https://github.com/EmersonBraun/mauri-backend/commit/ca678723cd75923a23621d24e1262fc2fc58953f))
+* add product distincts ([014bb60](https://github.com/EmersonBraun/mauri-backend/commit/014bb60e9bae8665b00af0d9adbdb39be41efae7))
+* add restrictions in filters of products ([fc8a9e5](https://github.com/EmersonBraun/mauri-backend/commit/fc8a9e5cb3052aa2686142d11f96b91ace6cd632))
+* update repositories and update UserController ([494865d](https://github.com/EmersonBraun/mauri-backend/commit/494865d0fa3a611ffdde6a5d43f7f37710c4eb14))
+
+
+### Bug Fixes
+
+* solve CRUD service ([d3e5a95](https://github.com/EmersonBraun/mauri-backend/commit/d3e5a95c2bc0bb83467d32bb4042dd32ce63f83d))
+* solve dependences of ProductRepository ([98102c2](https://github.com/EmersonBraun/mauri-backend/commit/98102c21de852eecfd1bfa3f001225dd40d704eb))
+* solve in OperationsController and PhonesController return of validation ([6e0f7ea](https://github.com/EmersonBraun/mauri-backend/commit/6e0f7eab4db355a946df062619d19002f880e83c))
+* solve user creation ([39eb37e](https://github.com/EmersonBraun/mauri-backend/commit/39eb37ede27e35e793e3706c5e41c09239c2d9be))
+* some imports ([c2c5f45](https://github.com/EmersonBraun/mauri-backend/commit/c2c5f45d116f33fb63b528d95b0f8228f23bb25a))
+
 ### [0.12.4](https://github.com/EmersonBraun/mauri-backend/compare/v0.12.3...v0.12.4) (2021-03-21)
 
 
