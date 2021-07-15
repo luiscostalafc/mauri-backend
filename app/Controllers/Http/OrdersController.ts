@@ -56,6 +56,7 @@ export default class OrdersController {
     try {
       await request.validate({schema: OrderSchema})
     } catch (error) {
+      console.log({error})
       return response
         .status(422)
         .json(validationError(error))

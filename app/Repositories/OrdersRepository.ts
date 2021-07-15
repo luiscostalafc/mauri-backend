@@ -26,7 +26,7 @@ class OrdersRepository {
   }
 
   async all () {
-    let data; let contentError = []
+    let data; let contentError = ""
     try {
       data = await Database
         .rawQuery(`
@@ -39,8 +39,8 @@ class OrdersRepository {
     } catch (error) {
       contentError = error
     }
-
-    return mountResponse(data.rows, contentError, 'load')
+    
+    return mountResponse(data?.rows || [], contentError, 'load')
   }
 
   async find (id) {

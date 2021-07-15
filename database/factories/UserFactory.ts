@@ -23,7 +23,8 @@ export const UserFactory = Factory
 export async function randomUserId () {
   const req = await User.query().select('id')
   if (!req) {
-    return 0
+    const { id } = await User.create(fakeUser())
+    return id
   }
   const ids = req.map(r => r.id)
   return ids[Math.floor(Math.random() * ids.length)]

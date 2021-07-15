@@ -51,7 +51,7 @@ class ProductsRepository {
 
   async all (request?: Product | {}) {
     let data: Product[]
-    let contentError = []
+    let contentError = ""
     if (request !== {}) {
       try {
         data = await Product.query().where({ ...request })

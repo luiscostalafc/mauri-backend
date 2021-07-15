@@ -11,7 +11,7 @@ export default class Phones extends BaseSchema {
 
   public async down () {
     this.schema.table(this.tableName, (table) => {
-      table.string('area_code').notNullable()
+      table.string('area_code')
     })
   }
 }
