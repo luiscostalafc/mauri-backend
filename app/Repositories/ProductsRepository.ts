@@ -50,17 +50,7 @@ class ProductsRepository {
   }
 
   async all (request?: Product | {}) {
-    let data: Product[]
-    let contentError = ""
-    if (request !== {}) {
-      try {
-        data = await Product.query().where({ ...request })
-      } catch (error) {
-        data = []
-        contentError = error
-      }
-      return mountResponse(data, contentError, 'load')
-    }
+    if (request !== {}) return await this.search(request)
     return await all(this.model)
   }
 

@@ -10,10 +10,10 @@ export default class ProductsController {
   constructor (private readonly repository = ProductsRepository) {}
 
   async index ({ response, request }: HttpContextContract) {
-    const { data, statusCode } = await this.repository.all(request.all())
+    const register = await this.repository.all(request.all())
     return response
-      .status(statusCode)
-      .json(data)
+      .status(register.statusCode)
+      .json(register)
   }
 
   async store ({ request, response }: HttpContextContract) {
