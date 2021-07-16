@@ -45,7 +45,7 @@ export const getData = (data) => data ?? []
 
 export function getStatusCode (contentError: any, typeFunction: TypeFunction): number {
   if (typeFunction === 'create') {
-    return !contentError ?.length ? 201 : 400
+    return !contentError?.length ? 201 : 400
   }
   return !contentError?.length ? 200 : 400
 }
@@ -72,4 +72,3 @@ export function mountHeader (type='success', message='Success', error=[]): objec
     contentError,
   }
 }
-
