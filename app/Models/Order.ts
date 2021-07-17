@@ -8,10 +8,10 @@ export default class Order extends BaseModel {
   @column({ isPrimary: true }) public id: number
   @column.dateTime({ autoCreate: true }) public createdAt: DateTime
   @column.dateTime({ autoCreate: true, autoUpdate: true }) public updatedAt: DateTime
-  @column({columnName: 'user_id'}) public userId: number
-  @column({columnName: 'provider_id'}) public providerId: number
-  @column({columnName: 'order_status_id'}) public orderStatusId: number
-  @column({columnName: 'delivery_id'}) public deliveryId: number
+  @column({columnName: 'user_id'}) public user_id: number
+  @column({columnName: 'provider_id'}) public provider_id: number
+  @column({columnName: 'order_status_id'}) public order_status_id: number
+  @column({columnName: 'delivery_id'}) public delivery_id: number
 
   @computed()
   public get extras () {

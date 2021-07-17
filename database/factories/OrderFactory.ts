@@ -6,10 +6,10 @@ import { randomUserId } from './UserFactory'
 
 export const OrderFactory = Factory
   .define(Order, async () => ({
-    userId: await randomUserId(),
-    providerId: await randomUserId(),
-    orderStatusId: await randomOrderStatusId(),
-    deliveryId: await randomDeliveryId(),
+    user_id: await randomUserId(),
+    provider_id: await randomUserId(),
+    order_status_id: await randomOrderStatusId(),
+    delivery_id: await randomDeliveryId(),
   }))
   .build()
 
@@ -23,8 +23,8 @@ export async function randomOrderId () {
 }
 
 export const fakeOrder = async () => ({
-  userId: await randomUserId(),
-  providerId: await randomUserId(),
-  orderStatusId: await randomOrderStatusId(),
-  deliveryId: await randomDeliveryId(),
+  user_id: await randomUserId(),
+  provider_id: await randomUserId(),
+  order_status_id: await randomOrderStatusId(),
+  delivery_id: await randomDeliveryId(),
 })

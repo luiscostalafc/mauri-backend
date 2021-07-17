@@ -1,16 +1,16 @@
 import { rules, schema } from '@ioc:Adonis/Core/Validator'
 
 export const OrderSchema = schema.create({
-  userId: schema.number([
+  user_id: schema.number([
     rules.exists({ table: 'users', column: 'id' }),
   ]),
-  providerId: schema.number([
+  provider_id: schema.number([
     rules.exists({ table: 'users', column: 'id' }),
   ]),
-  orderStatusId: schema.number([
+  order_status_id: schema.number([
     rules.exists({ table: 'order_statuses', column: 'id' }),
   ]),
-  deliveryId: schema.number([
+  delivery_id: schema.number([
     rules.exists({ table: 'deliveries', column: 'id' }),
   ]),
 })
