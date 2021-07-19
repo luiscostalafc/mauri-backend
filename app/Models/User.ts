@@ -21,6 +21,7 @@ export default class User extends BaseModel {
   @column() public cpf_cnpj: string
   @column() public nick: string
   @column() public is_provider: boolean
+  @column() public is_admin: boolean
   @column() public inactive: boolean
   @column() public avatar: string
   @column.dateTime({ autoCreate: true }) public createdAt: DateTime
