@@ -15,6 +15,7 @@ export const UserFactory = Factory
       cpf_cnpj: faker.random.arrayElement(['123.456.789-12', '987.654.321-98']),
       nick: faker.name.firstName(),
       is_provider: faker.random.boolean(),
+      is_admin: faker.random.boolean(),
       inactive: faker.random.boolean(),
     })
   })
