@@ -1,6 +1,6 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import UsersRepository from 'App/Repositories/UsersRepository'
-import { errorResponse, validationError } from 'App/Services/ResponseUtils'
+import { errorResponse, successResponse, validationError } from 'App/Services/ResponseUtils'
 import { AuthSchema } from 'App/Validators/AuthSchema'
 
 export default class AuthController {
@@ -25,13 +25,13 @@ export default class AuthController {
 
     return response
       .status(200)
-      .json({
-        token: token.toJSON(),
-        user: userData,
-        returnType: 'Success',
-        message: 'Usuário Logado',
-        contentError: [],
-      })
+      .json(successResponse({
+        data: {
+          token: token.toJSON(),
+          user: userData,
+        },
+        message: 'Usuário Logado'
+      }))
   }
 
   public async logout ({ response, auth }: HttpContextContract) {
@@ -39,16 +39,16 @@ export default class AuthController {
       await auth.use('api').logout()
       return response
         .status(200)
-        .json({
-          message: 'Usuário deslogado',
-          contentError: [],
-        })
+        .json(successResponse({
+          data: [],
+          message: 'Usuário deslogado'
+        }))
     } catch (error) {
       return response
         .status(400)
         .json(errorResponse({
           message: 'Erro na para fazer o deslog',
-          error,
+          error
         }))
     }
   }

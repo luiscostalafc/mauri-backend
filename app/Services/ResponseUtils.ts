@@ -2,11 +2,27 @@
 import transations from '../../config/transations'
 import { getErrors } from './MessageErros'
 export type TypeFunction = 'login'|'load'|'found'|'create'|'update'|'delete' |'restore'|'forceDelete'
-
+export interface Info {
+  statusCode: number,
+  returnType: "error" | 'success',
+  message: string,
+  contentError: any
+}
+export interface Response {
+  data: any
+  statusCode: number
+  info: Info
+}
 export const notFound = () => ({
   data: [],
   statusCode: 404,
   info: { statusCode: 404, returnType: "error", message: "Not Found", contentError: "Not Found"}
+})
+
+export const successResponse = ({data, message = 'success'}) => ({
+  data,
+  statusCode: 200,
+  info: { statusCode: 200, returnType: "success", message, contentError: ""}
 })
 
 export const errorResponse = ({message, error, statusCode = 400}) => ({
