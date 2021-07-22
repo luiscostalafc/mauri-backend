@@ -6,7 +6,7 @@ import Product from 'App/Models/Product'
 import Subgroup from 'App/Models/Subgroup'
 import Synonym from 'App/Models/Synonym'
 import { mountResponse } from 'App/Services/ResponseUtils'
-import { all, create, createOrUpdate, find, findAndDelete, findAndUpdate, first } from '../Services/CRUD'
+import { create, createOrUpdate, find, findAndDelete, findAndUpdate, first } from '../Services/CRUD'
 
 type Excel = Array<{
   0: string,
@@ -50,8 +50,31 @@ class ProductsRepository {
   }
 
   async all (request?: Product | {}) {
-    if (request !== {}) return await this.search(request)
-    return await all(this.model)
+    let contentError = ''
+    let data: any
+    if (request !== {}) {
+      try{
+        data = await this.model.query()
+          .preload('group')
+          .preload('subgroup')
+          .where(request)
+      } catch(error) {
+        console.log(error)
+        contentError = error
+      }
+    } else {
+      try{
+        data = await this.model.query()
+          .preload('group')
+          .preload('subgroup')
+          .get()
+      } catch(error) {
+        console.log(error)
+        contentError = error
+      }
+    }
+
+    return mountResponse(data, contentError, 'load')
   }
 
   async search (query: any) {

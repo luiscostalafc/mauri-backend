@@ -1,4 +1,4 @@
-import { BaseModel, column, hasMany, HasMany, hasOne, HasOne, manyToMany, ManyToMany } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, belongsTo, BelongsTo, column, hasMany, HasMany, hasOne, HasOne, manyToMany, ManyToMany } from '@ioc:Adonis/Lucid/Orm'
 import { DateTime } from 'luxon'
 import Asset from './Asset'
 import Group from './Group'
@@ -69,11 +69,11 @@ export default class Product extends BaseModel {
   @column() public assignments_mlb: string
   @column() public category_id_mlb: string
 
-  @hasOne(() => Group)
-  public group: HasOne<typeof Group>
+  @belongsTo(() => Group)
+  public group: BelongsTo<typeof Group>
 
-  @hasOne(() => Subgroup)
-  public subgroup: HasOne<typeof Subgroup>
+  @belongsTo(() => Subgroup)
+  public subgroup: BelongsTo<typeof Subgroup>
 
   @hasOne(() => ProductAsingment)
   public productAsingment: HasOne<typeof ProductAsingment>
