@@ -61,6 +61,8 @@ Route
     Route.resource('product-variation','ProductVariationsController').apiOnly()
     Route.post('stock-operations/search','StockOperationsController.search')
     Route.resource('stock-operations','StockOperationsController').apiOnly()
+    Route.resource('stock','StockController').apiOnly()
+    Route.resource('stock-types','StockTypeController').apiOnly()
     Route.post('subgroups/search','SubgroupsController.search')
     Route.resource('subgroups','SubgroupsController').apiOnly()
     Route.post('synonyms/search','SynonymsController.search')
