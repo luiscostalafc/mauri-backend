@@ -3,12 +3,16 @@ import Stock from 'App/Models/Stock'
 import faker from 'faker'
 import { randomProductId } from './ProductFactory'
 import { randomStockTypeId } from './StockTypeFactory'
+import { randomUserId } from './UserFactory'
 
 export const StockFactory = Factory
   .define(Stock, async ({ faker }) => ({
     quantity: faker.random.number(50),
+    minAlert: faker.random.number(50),
+    quality: faker.name.findName(),
     stock_type_id: await randomStockTypeId(),
     product_id: await randomProductId(),
+    user_id: await randomUserId(),
   }))
   .build()
 
@@ -23,6 +27,9 @@ export async function randomStockId () {
 
 export const fakeStock = async () => ({
   quantity: faker.random.number(50),
+  minAlert: faker.random.number(50),
+  quality: faker.name.findName(),
   stock_type_id: await randomStockTypeId(),
   product_id: await randomProductId(),
+  user_id: await randomUserId(),
 })

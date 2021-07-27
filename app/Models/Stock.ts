@@ -2,6 +2,7 @@ import { BaseModel, BelongsTo, belongsTo, column } from '@ioc:Adonis/Lucid/Orm'
 import { DateTime } from 'luxon'
 import Product from './Product'
 import StockType from './StockType'
+import User from './User'
 
 export default class Stock extends BaseModel {
   @column({ isPrimary: true }) public id: number
@@ -15,7 +16,10 @@ export default class Stock extends BaseModel {
   @column.dateTime({ autoCreate: true, autoUpdate: true }) public updatedAt: DateTime
 
   @belongsTo(() => StockType)
-  public stock: BelongsTo<typeof StockType>
+  public stockType: BelongsTo<typeof StockType>
+
+  @belongsTo(() => User)
+  public user: BelongsTo<typeof User>
 
   @belongsTo(() => Product)
   public product: BelongsTo<typeof Product>

@@ -1,7 +1,7 @@
 import BaseSchema from '@ioc:Adonis/Lucid/Schema'
 
-export default class StockTypes extends BaseSchema {
-  protected tableName = 'stock_types'
+export default class Stock extends BaseSchema {
+  protected tableName = 'stocks'
 
   public async up () {
     this.schema.table(this.tableName, (table) => {
