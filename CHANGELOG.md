@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.4.0](https://github.com/EmersonBraun/mauri-backend/compare/v1.3.0...v1.4.0) (2021-07-27)
+
+
+### Features
+
+* add columns ([9365f49](https://github.com/EmersonBraun/mauri-backend/commit/9365f49278bc82a1a8b71fa68b2b45f50bbdc96e))
+* add product totals ([cb8ad87](https://github.com/EmersonBraun/mauri-backend/commit/cb8ad870e588cfa84b0aab8ced62c546af6c7e29))
+
 ## [1.3.0](https://github.com/EmersonBraun/mauri-backend/compare/v1.2.0...v1.3.0) (2021-07-23)
 
 
