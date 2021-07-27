@@ -30,6 +30,9 @@ class StocksRepository {
     if (request !== {}) {
       try{
         data = await Stock.query()
+          .preload('product')
+          .preload('stockType')
+          .preload('user')
           .where({...request})
       } catch(error) {
         console.log(error)
@@ -38,6 +41,9 @@ class StocksRepository {
     } else {
       try{
         data = await Stock.query()
+          .preload('product')
+          .preload('stockType')
+          .preload('user')
           .exec()
       } catch(error) {
         console.log(error)

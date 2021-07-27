@@ -1,5 +1,5 @@
 import Hash from '@ioc:Adonis/Core/Hash'
-import { BaseModel, beforeSave, column, hasOne, HasOne, manyToMany, ManyToMany } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, beforeSave, column, HasMany, hasMany, hasOne, HasOne, manyToMany, ManyToMany } from '@ioc:Adonis/Lucid/Orm'
 import { DateTime } from 'luxon'
 import uploadConfig from '../../config/upload'
 import Address from './Address'
@@ -7,6 +7,7 @@ import Card from './Card'
 import Order from './Order'
 import Permission from './Permission'
 import Phone from './Phone'
+import Stock from './Stock'
 import UserGroup from './UserGroup'
 
 export default class User extends BaseModel {
@@ -79,4 +80,7 @@ export default class User extends BaseModel {
 
   @hasOne(() => Order)
   public order: HasOne<typeof Order>
+
+  @hasMany(() => Stock)
+  public stock: HasMany<typeof Stock>
 }
