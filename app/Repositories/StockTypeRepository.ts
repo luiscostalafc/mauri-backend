@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/explicit-member-accessibility */
 import Logger from '@ioc:Adonis/Core/Logger'
-import StockOperation from 'App/Models/StockOperation'
+import StockType from 'App/Models/StockType'
 import { mountResponse } from 'App/Services/ResponseUtils'
 import { create, createOrUpdate, find, findAndDelete, findAndUpdate, first } from '../Services/CRUD'
 
-class StockOperationsRepository {
+class StockTypesRepository {
   protected model: any
   protected obj = []
   protected contentError = []
@@ -17,21 +17,19 @@ class StockOperationsRepository {
   }
 
   constructor () {
-    this.model = StockOperation
+    this.model = StockType
   }
 
   async first () {
     return await first(this.model)
   }
 
-  async all (request?: StockOperation | {}) {
+  async all (request?: StockType | {}) {
     let contentError = ''
     let data: any
     if (request !== {}) {
       try{
-        data = await StockOperation.query()
-          .preload('operation')
-          .preload('product')
+        data = await StockType.query()
           .where({...request})
       } catch(error) {
         console.log(error)
@@ -39,9 +37,7 @@ class StockOperationsRepository {
       }
     } else {
       try{
-        data = await StockOperation.query()
-          .preload('operation')
-          .preload('product')
+        data = await StockType.query()
           .exec()
       } catch(error) {
         console.log(error)
@@ -86,4 +82,4 @@ class StockOperationsRepository {
   }
 }
 
-export default new StockOperationsRepository()
+export default new StockTypesRepository()

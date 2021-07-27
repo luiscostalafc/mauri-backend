@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.3.0](https://github.com/EmersonBraun/mauri-backend/compare/v1.2.0...v1.3.0) (2021-07-23)
+
+
+### Features
+
+* review stock ([ee7bd42](https://github.com/EmersonBraun/mauri-backend/commit/ee7bd42103ab2fa2f0b94c296858246bb42fc56e))
+
+## [1.2.0](https://github.com/EmersonBraun/mauri-backend/compare/v1.1.1...v1.2.0) (2021-07-22)
+
+
+### Features
+
+* add admin user ([87e0c0b](https://github.com/EmersonBraun/mauri-backend/commit/87e0c0b152f33efb1807c87a4fa79ec5c62403c3))
+* review products ([3c98c9f](https://github.com/EmersonBraun/mauri-backend/commit/3c98c9fa87f95387f8e2da073f13458bf48a65a3))
+
 ### [1.1.1](https://github.com/EmersonBraun/mauri-backend/compare/v1.1.0...v1.1.1) (2021-07-19)
 
 

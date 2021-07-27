@@ -1,12 +1,11 @@
 import BaseSeeder from '@ioc:Adonis/Lucid/Seeder'
 import Group from 'App/Models/Group'
+import Operation from 'App/Models/Operation'
 import User from 'App/Models/User'
 import {
   AddressFactory,
   CardFactory,
-  DeliveryFactory,
-  OperationFactory,
-  OrderDetailFactory,
+  DeliveryFactory, OrderDetailFactory,
   OrderStatusFactory,
   PermissionFactory,
   PhoneFactory,
@@ -17,9 +16,11 @@ import {
   SubgroupFactory,
   SynonymFactory,
   UserFactory,
-  UserGroupFactory,
+  UserGroupFactory
 } from 'Database/factories'
 import { OrderFactory } from 'Database/factories/OrderFactory'
+import { StockFactory } from 'Database/factories/StockFactory'
+import { StockTypeFactory } from 'Database/factories/StockTypeFactory'
 
 export default class AddressSeeder extends BaseSeeder {
   public async run () {
@@ -47,8 +48,13 @@ export default class AddressSeeder extends BaseSeeder {
     await ProductFactory.createMany(10)
     await ProductAsingmentFactory.createMany(10)
     await ProductVariationFactory.createMany(10)
-    await OperationFactory.createMany(10)
+    await Operation.updateOrCreateMany('operation',[
+      { operation: "Entrada"},
+      { operation: "Saída"},
+    ])
     await StockOperationFactory.createMany(10)
+    await StockFactory.createMany(10)
+    await StockTypeFactory.createMany(10)
     await SynonymFactory.createMany(10)
     await User.updateOrCreateMany('email',[
       {
