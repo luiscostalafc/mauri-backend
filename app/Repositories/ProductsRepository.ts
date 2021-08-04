@@ -93,6 +93,7 @@ class ProductsRepository {
   getValueByOperator (operator, value) {
     if (operator === '%') return `%${value}%`
     if (operator === '=') return value
+    return ''
   }
 
   getRestrictionQuery (restrictions) {
@@ -103,7 +104,7 @@ class ProductsRepository {
     let res = ''
     restrictions.forEach(({ name, operator, value}, index) => {
       const where = index === 0 ? 'WHERE' : 'AND'
-      res += `${where} ${name} ${operators[operator]} '${this.getValueByOperator(operator, value)}'` 
+      res += `${where} ${name} ${operators[operator] ?? '='} '${this.getValueByOperator(operator, value)}'` 
     });
     return res
   }
@@ -111,7 +112,7 @@ class ProductsRepository {
   async distinct (name, restrictions) {
     const stringName = Object.values(name).join('')
     let restriction = ''
-    if (restrictions.length) {
+    if (restrictions?.length) {
       restriction = this.getRestrictionQuery(restrictions)
     }
     let contentError = ''
