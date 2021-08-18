@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.4.1](https://github.com/EmersonBraun/mauri-backend/compare/v1.4.0...v1.4.1) (2021-08-04)
+
+
+### Bug Fixes
+
+* filters ([26ba540](https://github.com/EmersonBraun/mauri-backend/commit/26ba540cd65cd64b40aa7dea482549fb254e1ee3))
+
 ## [1.4.0](https://github.com/EmersonBraun/mauri-backend/compare/v1.3.0...v1.4.0) (2021-07-27)
 
 
