@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.1.0](https://github.com/EmersonBraun/mauri-backend/compare/v2.0.0...v2.1.0) (2021-11-16)
+
+
+### Features
+
+* adapt package to deploy in heroku ([ec46d70](https://github.com/EmersonBraun/mauri-backend/commit/ec46d705e5a0938f3e265ec46e2a35c52fb70501))
+* adapt package to deploy in heroku ([bedf28b](https://github.com/EmersonBraun/mauri-backend/commit/bedf28b0cc8a63177126119dc65aa51f4d6618bc))
+* add engines in package json ([d4dea4b](https://github.com/EmersonBraun/mauri-backend/commit/d4dea4be24bf0c082cc7c7d411a042ac4586c834))
+* config tsconfig ([adf4996](https://github.com/EmersonBraun/mauri-backend/commit/adf49964773b4a848cfd40ade42f13297cbd999a))
+
+
+### Bug Fixes
+
+* change config to new version ([392ea0b](https://github.com/EmersonBraun/mauri-backend/commit/392ea0b8d666ee6257567879ec026aeed576d9cd))
+* remove unused locks ([8790e87](https://github.com/EmersonBraun/mauri-backend/commit/8790e874d776749f7e46f88f27375a9f758faa99))
+
 ## [2.0.0](https://github.com/EmersonBraun/mauri-backend/compare/v1.4.1...v2.0.0) (2021-11-16)
 
 
