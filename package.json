@@ -42,12 +42,12 @@
     "youch-terminal": "^1.1.1"
   },
   "dependencies": {
+    "@adonisjs/assembler": "^3.0.6",
     "@adonisjs/auth": "^5.1.1",
     "@adonisjs/core": "~5.0.4-preview-rc-2.1",
     "@adonisjs/lucid": "^10.0.0",
     "@adonisjs/mail": "^7.2.4",
     "@adonisjs/repl": "^1.1.6",
-    "@adonisjs/assembler": "^3.0.6",
     "aws-sdk": "^2.1029.0",
     "g": "^2.0.1",
     "luxon": "^1.28.0",
