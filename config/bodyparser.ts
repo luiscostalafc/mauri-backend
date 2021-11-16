@@ -50,6 +50,7 @@ const bodyParserConfig: BodyParserConfig = {
   |
   */
   form: {
+    convertEmptyStringsToNull: true,
     encoding: 'utf-8',
     limit: '1mb',
     queryString: {},
@@ -82,6 +83,7 @@ const bodyParserConfig: BodyParserConfig = {
   | request content types which gets processed by the form parser.
   |
   */
+
   multipart: {
     /*
     |--------------------------------------------------------------------------
@@ -132,7 +134,7 @@ const bodyParserConfig: BodyParserConfig = {
     */
     // tmpFileName () {
     // },
-
+    convertEmptyStringsToNull: true,
     /*
     |--------------------------------------------------------------------------
     | Encoding
