@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.0.0](https://github.com/EmersonBraun/mauri-backend/compare/v1.4.1...v2.0.0) (2021-11-16)
+
+
+### Features
+
+* adapt to deploy in heroku ([91b8d42](https://github.com/EmersonBraun/mauri-backend/commit/91b8d427d231a4ffcbe88920e5e54b13062e0e1b))
+* adapt to deploy in heroku ([7bd154a](https://github.com/EmersonBraun/mauri-backend/commit/7bd154ac534a5590991bb615f07cc8ff5675983d))
+
 ### [1.4.1](https://github.com/EmersonBraun/mauri-backend/compare/v1.4.0...v1.4.1) (2021-08-04)
 
 
