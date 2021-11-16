@@ -3,8 +3,8 @@
   "version": "1.4.1",
   "private": true,
   "scripts": {
-    "build": "node ace build --production",
-    "start": "node ace serve -w -i='.docker'",
+    "build": "node ace build --production && cp .env.example build/.env && npm run migrate && npm run seed",
+    "start": "node build/server.js",
     "dev:server": "node ace serve -w -i='.docker'",
     "up": "docker-compose up -d",
     "down": "docker-compose down",
