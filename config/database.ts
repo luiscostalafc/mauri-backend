@@ -46,7 +46,7 @@ const databaseConfig: DatabaseConfig & { orm: Partial<OrmConfig> } = {
    | file.
    |
    */
-  connection: DB_CONNECTION ?? (Env.get('DB_CONNECTION', 'pg') as string),
+  connection: Env.get('DB_CONNECTION', 'pg') as string,
 
   connections: {
     /*
