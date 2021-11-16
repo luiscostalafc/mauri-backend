@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node build/server.js",
-    "build": "node ace build --production && cp .env.example build/.env && npm run migrate && npm run seed ",
+    "build": "node ace build --production && cp .env.example build/.env",
     "dev:server": "node ace serve -w -i='.docker'",
     "up": "docker-compose up -d",
     "down": "docker-compose down",
