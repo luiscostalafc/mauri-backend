@@ -18,7 +18,7 @@
     "test": "node -r @adonisjs/assembler/build/register japaFile.ts"
   },
   "devDependencies": {
-    "@adonisjs/assembler": "^3.0.0",
+    "@adonisjs/assembler": "^5.3.8",
     "@types/faker": "^5.1.7",
     "@types/jsdom": "^16.2.7",
     "@types/supertest": "^2.0.10",
@@ -46,7 +46,7 @@
     "@adonisjs/auth": "^5.1.1",
     "@adonisjs/core": "^5.0.4-preview-rc",
     "@adonisjs/lucid": "^10.0.0",
-    "@adonisjs/mail": "^5.2.3",
+    "@adonisjs/mail": "^7.2.4",
     "@adonisjs/repl": "^1.0.0",
     "aws-sdk": "^2.866.0",
     "g": "^2.0.1",
@@ -58,5 +58,8 @@
     "reflect-metadata": "^0.1.13",
     "source-map-support": "^0.5.19",
     "yarn": "^1.22.17"
+  },
+  "engines": {
+    "node": "16.x"
   }
 }
