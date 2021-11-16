@@ -27,7 +27,6 @@ const DB_CONNECTION_STRING: any & DBConnection =
   )
 
 const {
-  DB_CONNECTION = null,
   DB_USER = null,
   DB_PASSWORD = null,
   DB_HOST = null,
