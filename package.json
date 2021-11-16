@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node build/server.js",
     "build": "node ace build --production --ignore-ts-errors",
-    "dev:server": "node ace serve -w -i='.docker'",
+    "dev:server": "node ace serve",
     "up": "docker-compose up -d",
     "down": "docker-compose down",
     "migrate": "node ace migration:run",
@@ -18,7 +18,7 @@
     "test": "node -r @adonisjs/assembler/build/register japaFile.ts"
   },
   "devDependencies": {
-    "@adonisjs/assembler": "^5.3.8",
+    "@adonisjs/assembler": "^3.0.6",
     "@types/faker": "^5.5.9",
     "@types/jsdom": "^16.2.13",
     "@types/supertest": "^2.0.11",
@@ -44,10 +44,10 @@
   },
   "dependencies": {
     "@adonisjs/auth": "^5.1.1",
-    "@adonisjs/core": "^5.0.4-preview-rc",
+    "@adonisjs/core": "~5.0.4-preview-rc-2.1",
     "@adonisjs/lucid": "^10.0.0",
     "@adonisjs/mail": "^7.2.4",
-    "@adonisjs/repl": "^1.0.0",
+    "@adonisjs/repl": "^1.1.6",
     "aws-sdk": "^2.1029.0",
     "g": "^2.0.1",
     "luxon": "^1.28.0",
@@ -58,8 +58,5 @@
     "reflect-metadata": "^0.1.13",
     "source-map-support": "^0.5.20",
     "yarn": "^1.22.17"
-  },
-  "engines": {
-    "node": "14.x"
   }
 }

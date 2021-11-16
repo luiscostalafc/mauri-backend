@@ -9,9 +9,34 @@ import Application from '@ioc:Adonis/Core/Application'
 import Env from '@ioc:Adonis/Core/Env'
 import { DatabaseConfig } from '@ioc:Adonis/Lucid/Database'
 import { OrmConfig } from '@ioc:Adonis/Lucid/Orm'
- 
- const databaseConfig: DatabaseConfig & { orm: Partial<OrmConfig> } = {
-   /*
+
+interface DBConnection {
+  groups?: {
+    DB_CONNECTION?: string
+    DB_USER?: string
+    DB_PASSWORD?: string
+    DB_HOST?: string
+    DB_PORT?: string
+    DB_NAME?: string
+  }
+}
+
+const DB_CONNECTION_STRING: any & DBConnection =
+  /(?<DB_CONNECTION>\w+):\/\/(?<DB_USER>\w+):(?<DB_PASSWORD>\w+)@(?<DB_HOST>[A-Za-z0-9-.]+):(?<DB_PORT>\d+)\/(?<DB_NAME>[A-Za-z0-9-.]+)/gm.exec(
+    Env.get('DATABASE_URL', '')
+  )
+
+const {
+  DB_CONNECTION = null,
+  DB_USER = null,
+  DB_PASSWORD = null,
+  DB_HOST = null,
+  DB_PORT = null,
+  DB_NAME = null,
+} = DB_CONNECTION_STRING?.groups
+
+const databaseConfig: DatabaseConfig & { orm: Partial<OrmConfig> } = {
+  /*
    |--------------------------------------------------------------------------
    | Connection
    |--------------------------------------------------------------------------
@@ -21,10 +46,10 @@ import { OrmConfig } from '@ioc:Adonis/Lucid/Orm'
    | file.
    |
    */
-   connection: Env.get('DB_CONNECTION', 'pg') as string,
- 
-   connections: {
-     /*
+  connection: DB_CONNECTION ?? (Env.get('DB_CONNECTION', 'pg') as string),
+
+  connections: {
+    /*
      |--------------------------------------------------------------------------
      | Sqlite
      |--------------------------------------------------------------------------
@@ -35,16 +60,16 @@ import { OrmConfig } from '@ioc:Adonis/Lucid/Orm'
      | npm i sqlite3
      |
      */
-     sqlite: {
-       client: 'sqlite',
-       connection: {
-         filename: Application.tmpPath('db.sqlite3'),
-       },
-       useNullAsDefault: true,
-       healthCheck: false,
-     },
- 
-     /*
+    sqlite: {
+      client: 'sqlite',
+      connection: {
+        filename: Application.tmpPath('db.sqlite3'),
+      },
+      useNullAsDefault: true,
+      healthCheck: false,
+    },
+
+    /*
      |--------------------------------------------------------------------------
      | Mysql config
      |--------------------------------------------------------------------------
@@ -55,19 +80,19 @@ import { OrmConfig } from '@ioc:Adonis/Lucid/Orm'
      | npm i mysql
      |
      */
-     mysql: {
-       client: 'mysql',
-       connection: {
-         host: Env.get('DB_HOST', '127.0.0.1') as string,
-         port: Number(Env.get('DB_PORT', 3306)),
-         user: Env.get('DB_USER', 'lucid') as string,
-         password: Env.get('DB_PASSWORD', 'lucid') as string,
-         database: Env.get('DB_NAME', 'lucid') as string,
-       },
-       healthCheck: false,
-     },
- 
-     /*
+    mysql: {
+      client: 'mysql',
+      connection: {
+        host: Env.get('DB_HOST', '127.0.0.1') as string,
+        port: Number(Env.get('DB_PORT', 3306)),
+        user: Env.get('DB_USER', 'lucid') as string,
+        password: Env.get('DB_PASSWORD', 'lucid') as string,
+        database: Env.get('DB_NAME', 'lucid') as string,
+      },
+      healthCheck: false,
+    },
+
+    /*
      |--------------------------------------------------------------------------
      | PostgreSQL config
      |--------------------------------------------------------------------------
@@ -78,20 +103,21 @@ import { OrmConfig } from '@ioc:Adonis/Lucid/Orm'
      | npm i pg
      |
      */
-     pg: {
-       client: 'pg',
-       connection: {
-         host: Env.get('DB_HOST', 'localhost') as string,
-         port: Number(Env.get('DB_PORT', 5432)),
-         user: Env.get('DB_USER', 'lucid') as string,
-         password: Env.get('DB_PASSWORD', 'lucid') as string,
-         database: Env.get('DB_NAME', 'lucid') as string,
-       },
-       healthCheck: false,
-     },
-   },
- 
-   /*
+
+    pg: {
+      client: 'pg',
+      connection: {
+        host: DB_HOST ?? (Env.get('DB_HOST', 'localhost') as string),
+        port: DB_PORT ?? Number(Env.get('DB_PORT', 5432)),
+        user: DB_USER ?? (Env.get('DB_USER', 'lucid') as string),
+        password: DB_PASSWORD ?? (Env.get('DB_PASSWORD', 'lucid') as string),
+        database: DB_NAME ?? (Env.get('DB_NAME', 'lucid') as string),
+      },
+      healthCheck: false,
+    },
+  },
+
+  /*
    |--------------------------------------------------------------------------
    | Orm Configuration
    |--------------------------------------------------------------------------
@@ -103,9 +129,7 @@ import { OrmConfig } from '@ioc:Adonis/Lucid/Orm'
    | - Or define a custom function to compute the primary key for a given model.
    |
    */
-   orm: {
-   },
- }
- 
- export default databaseConfig
- 
+  orm: {},
+}
+
+export default databaseConfig
