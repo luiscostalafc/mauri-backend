@@ -8,8 +8,8 @@ export const PhoneFactory = Factory
     user_id: await randomUserId(),
     type: faker.random.arrayElement(['celular', 'fixo', 'comercial', 'contato']),
     phone: faker.phone.phoneNumber(),
-    whatsapp: faker.random.boolean(),
-    inactive: faker.random.boolean(),
+    whatsapp: faker.datatype.boolean(),
+    inactive: faker.datatype.boolean(),
     obs: faker.lorem.words(5),
   }))
   .build()
@@ -27,7 +27,7 @@ export const fakePhone = async () => ({
   user_id: await randomUserId(),
   type: faker.random.arrayElement(['celular', 'fixo', 'comercial', 'contato']),
   phone: faker.phone.phoneNumber(),
-  whatsapp: faker.random.boolean(),
-  inactive: faker.random.boolean(),
+  whatsapp: faker.datatype.boolean(),
+  inactive: faker.datatype.boolean(),
   obs: faker.lorem.words(5),
 })

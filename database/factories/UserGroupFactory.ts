@@ -6,7 +6,7 @@ export const UserGroupFactory = Factory
   .define(UserGroup, ({ faker }) => {
     return ({
       group: faker.name.jobTitle(),
-      is_visible: faker.random.boolean(),
+      is_visible: faker.datatype.boolean(),
     })
   })
   .build()
@@ -22,5 +22,5 @@ export async function randomUserGroupId () {
 
 export const fakeUserGroup = () => ({
   group: faker.name.jobTitle(),
-  is_visible: faker.random.boolean(),
+  is_visible: faker.datatype.boolean(),
 })

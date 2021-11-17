@@ -9,8 +9,8 @@ export const OrderDetailFactory = Factory
     payment_method: faker.finance.transactionType(),
     order_status: faker.random.arrayElement(['aprovada', 'em análise']),
     extra_amount: faker.finance.amount(1),
-    intallment_quantity: faker.random.number(12),
-    intallment_value: faker.random.number(999),
+    intallment_quantity: faker.datatype.number(12),
+    intallment_value: faker.datatype.number(999),
     order_id: await randomOrderId(),
   }))
   .build()
@@ -29,7 +29,7 @@ export const fakeOrderDatail = async () => ({
   payment_method: faker.finance.transactionType(),
   order_status: faker.random.arrayElement(['aprovada', 'em análise']),
   extra_amount: faker.finance.amount(1),
-  intallment_quantity: faker.random.number(12),
-  intallment_value: faker.random.number(999),
+  intallment_quantity: faker.datatype.number(12),
+  intallment_value: faker.datatype.number(999),
   order_id: await randomOrderId(),
 })

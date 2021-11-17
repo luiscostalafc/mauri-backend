@@ -13,10 +13,10 @@ export const AddressFactory = Factory
     country: faker.address.zipCode(),
     district: faker.address.citySuffix(),
     street: faker.address.streetName(),
-    number: String(faker.random.number(1000)),
+    number: String(faker.datatype.number(1000)),
     complement: faker.random.arrayElement(['casa','apartarmento','']),
-    delivery: faker.random.boolean(),
-    inactive: faker.random.boolean(),
+    delivery: faker.datatype.boolean(),
+    inactive: faker.datatype.boolean(),
   }))
   .build()
 
@@ -38,8 +38,8 @@ export const fakeAddress = async () => ({
   country: faker.address.zipCode(),
   district: faker.address.citySuffix(),
   street: faker.address.streetName(),
-  number: String(faker.random.number(1000)),
+  number: String(faker.datatype.number(1000)),
   complement: faker.random.arrayElement(['casa','apartarmento','']),
-  delivery: faker.random.boolean(),
-  inactive: faker.random.boolean(),
+  delivery: faker.datatype.boolean(),
+  inactive: faker.datatype.boolean(),
 })

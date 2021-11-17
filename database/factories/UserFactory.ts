@@ -14,9 +14,9 @@ export const UserFactory = Factory
       rg: faker.random.arrayElement(['123456789', '987654321', '123789456', '789123456']),
       cpf_cnpj: faker.random.arrayElement(['123.456.789-12', '987.654.321-98']),
       nick: faker.name.firstName(),
-      is_provider: faker.random.boolean(),
-      is_admin: faker.random.boolean(),
-      inactive: faker.random.boolean(),
+      is_provider: faker.datatype.boolean(),
+      is_admin: faker.datatype.boolean(),
+      inactive: faker.datatype.boolean(),
     })
   })
   .build()
@@ -41,6 +41,6 @@ export const fakeUser = () => ({
   rg: faker.random.arrayElement(['123456789', '987654321', '123789456', '789123456']),
   cpf_cnpj: faker.random.arrayElement(['123.456.789-12', '987.654.321-98']),
   nick: faker.name.firstName(),
-  is_provider: faker.random.boolean(),
-  inactive: faker.random.boolean(),
+  is_provider: faker.datatype.boolean(),
+  inactive: faker.datatype.boolean(),
 })

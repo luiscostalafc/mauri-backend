@@ -7,8 +7,8 @@ import { randomUserId } from './UserFactory'
 
 export const StockFactory = Factory
   .define(Stock, async ({ faker }) => ({
-    quantity: faker.random.number(50),
-    minAlert: faker.random.number(50),
+    quantity: faker.datatype.number(50),
+    minAlert: faker.datatype.number(50),
     quality: faker.name.findName(),
     stock_type_id: await randomStockTypeId(),
     product_id: await randomProductId(),
@@ -26,8 +26,8 @@ export async function randomStockId () {
 }
 
 export const fakeStock = async () => ({
-  quantity: faker.random.number(50),
-  minAlert: faker.random.number(50),
+  quantity: faker.datatype.number(50),
+  minAlert: faker.datatype.number(50),
   quality: faker.name.findName(),
   stock_type_id: await randomStockTypeId(),
   product_id: await randomProductId(),

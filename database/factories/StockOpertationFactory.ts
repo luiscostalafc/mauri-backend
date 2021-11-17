@@ -6,8 +6,8 @@ import { randomProductId } from './ProductFactory'
 
 export const StockOperationFactory = Factory
   .define(StockOperation, async ({ faker }) => ({
-    quantity: faker.random.number(50),
-    unit_value: faker.random.number(50),
+    quantity: faker.datatype.number(50),
+    unit_value: faker.datatype.number(50),
     comment: faker.lorem.words(5),
     operation_id: await randomOperationId(),
     product_id: await randomProductId(),
@@ -24,8 +24,8 @@ export async function randomStockOperationId () {
 }
 
 export const fakeStockOperation = async () => ({
-  quantity: faker.random.number(50),
-  unit_value: faker.random.number(50),
+  quantity: faker.datatype.number(50),
+  unit_value: faker.datatype.number(50),
   comment: faker.lorem.words(5),
   operation_id: await randomOperationId(),
   product_id: await randomProductId(),

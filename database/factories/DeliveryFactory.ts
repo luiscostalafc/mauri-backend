@@ -6,7 +6,7 @@ export const DeliveryFactory = Factory
   .define(Delivery, ({ faker }) => {
     return ({
       delivery: faker.name.jobType(),
-      inactive: faker.random.boolean(),
+      inactive: faker.datatype.boolean(),
     })
   })
   .build()
@@ -22,5 +22,5 @@ export async function randomDeliveryId () {
 
 export const fakeDelivery = async () => ({
   delivery: faker.name.jobType(),
-  inactive: faker.random.boolean(),
+  inactive: faker.datatype.boolean(),
 })
