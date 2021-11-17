@@ -10,29 +10,29 @@ import Env from '@ioc:Adonis/Core/Env'
 import { DatabaseConfig } from '@ioc:Adonis/Lucid/Database'
 import { OrmConfig } from '@ioc:Adonis/Lucid/Orm'
 
-// interface DBConnection {
-//   groups?: {
-//     DB_CONNECTION?: string
-//     DB_USER?: string
-//     DB_PASSWORD?: string
-//     DB_HOST?: string
-//     DB_PORT?: string
-//     DB_NAME?: string
-//   }
-// }
+interface DBConnection {
+  groups?: {
+    DB_CONNECTION?: string
+    DB_USER?: string
+    DB_PASSWORD?: string
+    DB_HOST?: string
+    DB_PORT?: string
+    DB_NAME?: string
+  }
+}
 
-// const DB_CONNECTION_STRING: any & DBConnection =
-//   /(?<DB_CONNECTION>\w+):\/\/(?<DB_USER>\w+):(?<DB_PASSWORD>\w+)@(?<DB_HOST>[A-Za-z0-9-.]+):(?<DB_PORT>\d+)\/(?<DB_NAME>[A-Za-z0-9-.]+)/gm.exec(
-//     Env.get('DATABASE_URL', '')
-//   )
+const DB_CONNECTION_STRING: any & DBConnection =
+  /(?<DB_CONNECTION>\w+):\/\/(?<DB_USER>\w+):(?<DB_PASSWORD>\w+)@(?<DB_HOST>[A-Za-z0-9-.]+):(?<DB_PORT>\d+)\/(?<DB_NAME>[A-Za-z0-9-.]+)/gm.exec(
+    Env.get('DATABASE_URL', '')
+  )
 
-// const {
-//   DB_USER = null,
-//   DB_PASSWORD = null,
-//   DB_HOST = null,
-//   DB_PORT = null,
-//   DB_NAME = null,
-// } = DB_CONNECTION_STRING?.groups
+const {
+  DB_USER = null,
+  DB_PASSWORD = null,
+  DB_HOST = null,
+  DB_PORT = null,
+  DB_NAME = null,
+} = DB_CONNECTION_STRING?.groups
 
 const databaseConfig: DatabaseConfig & { orm: Partial<OrmConfig> } = {
   /*
@@ -106,11 +106,12 @@ const databaseConfig: DatabaseConfig & { orm: Partial<OrmConfig> } = {
     pg: {
       client: 'pg',
       connection: {
-        host: Env.get('DB_HOST', 'localhost') as string,
-        port: Number(Env.get('DB_PORT', 5432)),
-        user: Env.get('DB_USER', 'lucid') as string,
-        password: Env.get('DB_PASSWORD', 'lucid') as string,
-        database: Env.get('DB_NAME', 'lucid') as string,
+        host: DB_HOST ?? (Env.get('DB_HOST', 'localhost') as string),
+        port: DB_PORT ?? Number(Env.get('DB_PORT', 5432)),
+        user: DB_USER ?? (Env.get('DB_USER', 'lucid') as string),
+        password: DB_PASSWORD ?? (Env.get('DB_PASSWORD', 'lucid') as string),
+        database: DB_NAME ?? (Env.get('DB_NAME', 'lucid') as string),
+        ssl: false
       },
       healthCheck: false,
     },
