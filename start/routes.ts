@@ -72,6 +72,7 @@ Route
     Route.post('user-groups/search','UserGroupsController.search')
     Route.resource('user-groups','UserGroupsController').apiOnly()
     Route.resource('reset', 'ResetPasswordController').apiOnly()
+    Route.resource('mercadopago', 'MercadoPagoController').apiOnly()
   })
   .prefix('/api')
   // .middleware('auth')
