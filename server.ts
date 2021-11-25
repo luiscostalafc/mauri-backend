@@ -11,19 +11,11 @@
 */
 
 import { Ignitor } from '@adonisjs/core/build/standalone'
-import mercadopago from 'mercadopago'
 import 'reflect-metadata'
 import sourceMapSupport from 'source-map-support'
+import { MPBootstrap } from './app/Services/mercadopago'
 
 sourceMapSupport.install({ handleUncaughtExceptions: false })
-
-const MPBootstrap = () => {
-  const mercadoPagoToken = process.env.MP_TOKEN
-  if (!mercadoPagoToken) {
-    throw new Error('MP_TOKEN is not set')
-  }
-  mercadopago.configurations.setAccessToken(mercadoPagoToken)
-}
 
 new Ignitor(__dirname)
   .httpServer()

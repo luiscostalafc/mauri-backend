@@ -13,85 +13,86 @@ import {
   PaymentUpdateResponse
 } from 'mercadopago/resources/payment'
 
-export const getPaymentMP = async (
-  id: number,
-  configuration?: DefaultConfigurationOmitQs
-): Promise<PaymentGetResponse> => {
-  try {
-    return await mercadopago.payment.get(id, configuration)
-  } catch (error) {
-    console.error(error)
-    throw new Error('Error to getPaymentMP')
+class MercadoPagoPaymentService {
+  async getPaymentMP(
+    id: number,
+    configuration?: DefaultConfigurationOmitQs
+  ): Promise<PaymentGetResponse> {
+    try {
+      return await mercadopago.payment.get(id, configuration)
+    } catch (error) {
+      console.error(error)
+      throw new Error('Error to getPaymentMP')
+    }
   }
-}
 
-export const capturePaymentByIdMP = async (
-  id: number,
-  configuration?: DefaultConfigurationOmitQs
-): Promise<PaymentUpdateResponse> => {
-  try {
-    return await mercadopago.payment.capture(id, configuration)
-  } catch (error) {
-    console.error(error)
-    throw new Error('Error to capturePaymentByIdMP')
+  async capturePaymentByIdMP(
+    id: number,
+    configuration?: DefaultConfigurationOmitQs
+  ): Promise<PaymentUpdateResponse> {
+    try {
+      return await mercadopago.payment.capture(id, configuration)
+    } catch (error) {
+      console.error(error)
+      throw new Error('Error to capturePaymentByIdMP')
+    }
   }
-}
 
-export const captureParcialPaymentMP = async (
-  payload: CapturePartialPaymentPayload,
-  configuration?: DefaultConfigurationOmitQs
-): Promise<PaymentUpdateResponse> => {
-  try {
-    return await mercadopago.payment.capturePartial(payload, configuration)
-  } catch (error) {
-    console.error(error)
-    throw new Error('Error to captureParcialPaymentMP')
+  async captureParcialPaymentMP(
+    payload: CapturePartialPaymentPayload,
+    configuration?: DefaultConfigurationOmitQs
+  ): Promise<PaymentUpdateResponse> {
+    try {
+      return await mercadopago.payment.capturePartial(payload, configuration)
+    } catch (error) {
+      console.error(error)
+      throw new Error('Error to captureParcialPaymentMP')
+    }
   }
-}
 
-export const createPaymentMP = async (
-  payload: CreatePaymentPayload,
-  configuration?: DefaultConfigurationOmitQs
-): Promise<PaymentCreateResponse> => {
-  try {
-    return await mercadopago.payment.create(payload, configuration)
-  } catch (error) {
-    console.error(error)
-    throw new Error('Error to createPaymentMP')
+  async createPaymentMP(
+    payload: CreatePaymentPayload,
+    configuration?: DefaultConfigurationOmitQs
+  ): Promise<PaymentCreateResponse> {
+    try {
+      return await mercadopago.payment.create(payload, configuration)
+    } catch (error) {
+      console.error(error)
+      throw new Error('Error to createPaymentMP')
+    }
   }
-}
 
-export const updatePaymentMP = async (
-  payload: UpdatePaymentPayload,
-  configuration?: DefaultConfigurationOmitQs
-): Promise<PaymentUpdateResponse> => {
-  try {
-    return await mercadopago.payment.update(payload, configuration)
-  } catch (error) {
-    console.error(error)
-    throw new Error('Error to updatePaymentMP')
+  async updatePaymentMP(
+    payload: UpdatePaymentPayload,
+    configuration?: DefaultConfigurationOmitQs
+  ): Promise<PaymentUpdateResponse> {
+    try {
+      return await mercadopago.payment.update(payload, configuration)
+    } catch (error) {
+      console.error(error)
+      throw new Error('Error to updatePaymentMP')
+    }
   }
-}
 
-export const searchPaymentMP = async (
-  payload: SearchConfiguration
-): Promise<PaymentSearchResponse> => {
-  try {
-    return await mercadopago.payment.search(payload)
-  } catch (error) {
-    console.error(error)
-    throw new Error('Error to searchPayment')
+  async searchPaymentMP(payload: SearchConfiguration): Promise<PaymentSearchResponse> {
+    try {
+      return await mercadopago.payment.search(payload)
+    } catch (error) {
+      console.error(error)
+      throw new Error('Error to searchPayment')
+    }
   }
-}
 
-export const deletePaymentMP = async (
-  id: number,
-  configuration?: DefaultConfigurationOmitQs
-): Promise<PaymentUpdateResponse> => {
-  try {
-    return await mercadopago.payment.cancel(id, configuration)
-  } catch (error) {
-    console.error(error)
-    throw new Error('Error to deletePayment')
+  async deletePaymentMP(
+    id: number,
+    configuration?: DefaultConfigurationOmitQs
+  ): Promise<PaymentUpdateResponse> {
+    try {
+      return await mercadopago.payment.cancel(id, configuration)
+    } catch (error) {
+      console.error(error)
+      throw new Error('Error to deletePayment')
+    }
   }
 }
+export default new MercadoPagoPaymentService()
