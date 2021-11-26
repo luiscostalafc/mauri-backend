@@ -16,7 +16,7 @@ export default class MercadoPagoPreapprovalController {
   ) {}
 
   async index({ request, response }: HttpContextContract) {
-    const register = await this.service.getPreApprovalMP(request.input('customerId'))
+    const register = await this.service.get(request.input('customerId'))
     return response.json(register)
   }
 
@@ -27,8 +27,8 @@ export default class MercadoPagoPreapprovalController {
       return response.status(422).json(validationError(error))
     }
 
-    const data = request.all() as typeof MercadoPagoPreapprovalCreateSchema
-    const res = await this.service.createPreApprovalMP(data)
+    const data = request.all()
+    const res = await this.service.create(data)
 
     const user = auth.user
     const register = await this.repository.create({
@@ -47,8 +47,8 @@ export default class MercadoPagoPreapprovalController {
       return response.status(422).json(validationError(error))
     }
 
-    const data = request.all() as typeof MercadoPagoPreapprovalSearchSchema
-    const res = await this.service.pausePreApprovalMP(data)
+    const data = request.all() as any
+    const res = await this.service.pause(data)
 
     const user = auth.user
     const register = await this.repository.create({
@@ -67,8 +67,8 @@ export default class MercadoPagoPreapprovalController {
       return response.status(422).json(validationError(error))
     }
 
-    const data = request.all() as typeof MercadoPagoPreapprovalUpdateSchema
-    const res = await this.service.updatePreApprovalMP({ ...data, ...params })
+    const data = request.all()
+    const res = await this.service.update({ ...data, ...params })
 
     const user = auth.user
     const register = await this.repository.create({
@@ -81,7 +81,7 @@ export default class MercadoPagoPreapprovalController {
   }
 
   async destroy({ params, response, auth }: HttpContextContract) {
-    const res = await this.service.cancelPreApprovalMP(params.id)
+    const res = await this.service.cancel(params.id)
 
     const user = auth.user
     const register = await this.repository.create({

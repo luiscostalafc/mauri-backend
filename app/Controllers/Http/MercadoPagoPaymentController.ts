@@ -12,7 +12,7 @@ export default class MercadoPagoPaymentController {
     ) {}
 
   async index({ request, response }: HttpContextContract) {
-    const register = await this.service.getPaymentMP(request.input('customerId'))
+    const register = await this.service.get(request.input('customerId'))
     return response.json(register)
   }
 
@@ -23,8 +23,8 @@ export default class MercadoPagoPaymentController {
       return response.status(422).json(validationError(error))
     }
 
-    const data = request.all() as typeof MercadoPagoPaymentCreateSchema
-    const res = await this.service.createPaymentMP(data)
+    const data = request.all() as any
+    const res = await this.service.create(data)
     
     const user = auth.user
     const register = await this.repository.create({
@@ -43,8 +43,8 @@ export default class MercadoPagoPaymentController {
       return response.status(422).json(validationError(error))
     }
 
-    const data = request.all() as typeof MercadoPagoPaymentSearchSchema
-    const res = await this.service.capturePaymentByIdMP(data)
+    const data = request.all() as any
+    const res = await this.service.capture(data)
     
     const user = auth.user
     const register = await this.repository.create({
@@ -64,7 +64,7 @@ export default class MercadoPagoPaymentController {
     }
     
     const data = request.all() as typeof MercadoPagoPaymentUpdateSchema
-    const res = await this.service.updatePaymentMP({ ...data, ...params})
+    const res = await this.service.update({ ...data, ...params})
     
     const user = auth.user
     const register = await this.repository.create({
@@ -77,7 +77,7 @@ export default class MercadoPagoPaymentController {
   }
 
   async destroy({ params, response, auth }: HttpContextContract) {
-    const res = await this.service.deletePaymentMP(params.id)
+    const res = await this.service.delete(params.id)
     
     const user = auth.user
     const register = await this.repository.create({

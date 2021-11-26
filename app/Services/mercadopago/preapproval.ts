@@ -9,7 +9,7 @@ import {
 } from 'mercadopago/resources/preapproval'
 
 class MercadoPagoPreapprovalService {
-  async getPreApprovalMP(
+  async get(
     id: string,
     configuration?: DefaultConfigurationOmitQs
   ): Promise<PreApprovalGetResponse> {
@@ -17,11 +17,11 @@ class MercadoPagoPreapprovalService {
       return await mercadopago.preapproval.get(id, configuration)
     } catch (error) {
       console.error(error)
-      throw new Error('Error to getPreApprovalMP')
+      throw new Error('Error to get')
     }
   }
 
-  async createPreApprovalMP(
+  async create(
     payload: CreatePreApprovalPayload,
     configuration?: DefaultConfigurationOmitQs
   ): Promise<PreApprovalCreateResponse> {
@@ -29,11 +29,11 @@ class MercadoPagoPreapprovalService {
       return await mercadopago.preapproval.create(payload, configuration)
     } catch (error) {
       console.error(error)
-      throw new Error('Error to createPreApprovalMP')
+      throw new Error('Error to create')
     }
   }
 
-  async updatePreApprovalMP(
+  async update(
     payload: UpdatePreApprovalPayload,
     configuration?: DefaultConfigurationOmitQs
   ): Promise<PreApprovalUpdateResponse> {
@@ -41,11 +41,11 @@ class MercadoPagoPreapprovalService {
       return await mercadopago.preapproval.update(payload, configuration)
     } catch (error) {
       console.error(error)
-      throw new Error('Error to updatePreApprovalMP')
+      throw new Error('Error to update')
     }
   }
 
-  async cancelPreApprovalMP(
+  async cancel(
     id: string,
     configuration?: DefaultConfigurationOmitQs
   ): Promise<PreApprovalUpdateResponse> {
@@ -53,11 +53,11 @@ class MercadoPagoPreapprovalService {
       return await mercadopago.preapproval.cancel(id, configuration)
     } catch (error) {
       console.error(error)
-      throw new Error('Error to cancelPreApprovalMP')
+      throw new Error('Error to cancel')
     }
   }
 
-  async pausePreApprovalMP(
+  async pause(
     id: string,
     configuration?: DefaultConfigurationOmitQs
   ): Promise<PreApprovalUpdateResponse> {
@@ -65,7 +65,7 @@ class MercadoPagoPreapprovalService {
       return await mercadopago.preapproval.pause(id, configuration)
     } catch (error) {
       console.error(error)
-      throw new Error('Error to pausePreApprovalMP')
+      throw new Error('Error to pause')
     }
   }
 }

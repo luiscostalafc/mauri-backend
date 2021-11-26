@@ -23,7 +23,7 @@ export default class MercadoPagoCustomerController {
       return response.status(422).json(validationError(error))
     }
 
-    const data = request.all() as typeof MercadoPagoCustomerCreateSchema
+    const data = request.all()
     const res = await this.service.create(data)
     
     const user = auth.user
@@ -43,8 +43,8 @@ export default class MercadoPagoCustomerController {
       return response.status(422).json(validationError(error))
     }
 
-    const data = request.all() as typeof MercadoPagoCustomerSearchSchema
-    const res = await this.service.findCustomerByIdMP(data)
+    const data = request.all() as any
+    const res = await this.service.find(data)
     
     const user = auth.user
     const register = await this.repository.create({
@@ -63,7 +63,7 @@ export default class MercadoPagoCustomerController {
       return response.status(422).json(validationError(error))
     }
     
-    const data = request.all() as typeof MercadoPagoCustomerUpdateSchema
+    const data = request.all()
     const res = await this.service.update({ ...data, ...params})
     
     const user = auth.user

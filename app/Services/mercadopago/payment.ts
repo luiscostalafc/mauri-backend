@@ -14,7 +14,7 @@ import {
 } from 'mercadopago/resources/payment'
 
 class MercadoPagoPaymentService {
-  async getPaymentMP(
+  async get(
     id: number,
     configuration?: DefaultConfigurationOmitQs
   ): Promise<PaymentGetResponse> {
@@ -22,11 +22,11 @@ class MercadoPagoPaymentService {
       return await mercadopago.payment.get(id, configuration)
     } catch (error) {
       console.error(error)
-      throw new Error('Error to getPaymentMP')
+      throw new Error('Error to get')
     }
   }
 
-  async capturePaymentByIdMP(
+  async capture(
     id: number,
     configuration?: DefaultConfigurationOmitQs
   ): Promise<PaymentUpdateResponse> {
@@ -34,11 +34,11 @@ class MercadoPagoPaymentService {
       return await mercadopago.payment.capture(id, configuration)
     } catch (error) {
       console.error(error)
-      throw new Error('Error to capturePaymentByIdMP')
+      throw new Error('Error to capture')
     }
   }
 
-  async captureParcialPaymentMP(
+  async captureParcial(
     payload: CapturePartialPaymentPayload,
     configuration?: DefaultConfigurationOmitQs
   ): Promise<PaymentUpdateResponse> {
@@ -46,11 +46,11 @@ class MercadoPagoPaymentService {
       return await mercadopago.payment.capturePartial(payload, configuration)
     } catch (error) {
       console.error(error)
-      throw new Error('Error to captureParcialPaymentMP')
+      throw new Error('Error to captureParcial')
     }
   }
 
-  async createPaymentMP(
+  async create(
     payload: CreatePaymentPayload,
     configuration?: DefaultConfigurationOmitQs
   ): Promise<PaymentCreateResponse> {
@@ -58,11 +58,11 @@ class MercadoPagoPaymentService {
       return await mercadopago.payment.create(payload, configuration)
     } catch (error) {
       console.error(error)
-      throw new Error('Error to createPaymentMP')
+      throw new Error('Error to create')
     }
   }
 
-  async updatePaymentMP(
+  async update(
     payload: UpdatePaymentPayload,
     configuration?: DefaultConfigurationOmitQs
   ): Promise<PaymentUpdateResponse> {
@@ -70,11 +70,11 @@ class MercadoPagoPaymentService {
       return await mercadopago.payment.update(payload, configuration)
     } catch (error) {
       console.error(error)
-      throw new Error('Error to updatePaymentMP')
+      throw new Error('Error to update')
     }
   }
 
-  async searchPaymentMP(payload: SearchConfiguration): Promise<PaymentSearchResponse> {
+  async search(payload: SearchConfiguration): Promise<PaymentSearchResponse> {
     try {
       return await mercadopago.payment.search(payload)
     } catch (error) {
@@ -83,7 +83,7 @@ class MercadoPagoPaymentService {
     }
   }
 
-  async deletePaymentMP(
+  async delete(
     id: number,
     configuration?: DefaultConfigurationOmitQs
   ): Promise<PaymentUpdateResponse> {

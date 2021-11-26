@@ -12,7 +12,7 @@ export default class MercadoPagoMerchantOrderController {
     ) {}
 
   async index({ request, response }: HttpContextContract) {
-    const register = await this.service.getMerchantOrderMP(request.input('customerId'))
+    const register = await this.service.get(request.input('customerId'))
     return response.json(register)
   }
 
@@ -23,8 +23,8 @@ export default class MercadoPagoMerchantOrderController {
       return response.status(422).json(validationError(error))
     }
 
-    const data = request.all() as typeof MercadoPagoMerchantOrderCreateSchema
-    const res = await this.service.createMerchantOrderMP(data)
+    const data = request.all()
+    const res = await this.service.create(data)
     
     const user = auth.user
     const register = await this.repository.create({
@@ -43,8 +43,8 @@ export default class MercadoPagoMerchantOrderController {
       return response.status(422).json(validationError(error))
     }
     
-    const data = request.all() as typeof MercadoPagoMerchantOrderUpdateSchema
-    const res = await this.service.updateMerchantOrderMP({ ...data, ...params})
+    const data = request.all()
+    const res = await this.service.update({ ...data, ...params})
     
     const user = auth.user
     const register = await this.repository.create({

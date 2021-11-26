@@ -1,37 +1,21 @@
-import { rules, schema } from '@ioc:Adonis/Core/Validator'
+import { schema } from '@ioc:Adonis/Core/Validator'
 
 export const MercadoPagoCardCreateSchema = schema.create({
-  'transaction_amount': schema.number(),
-  'token': schema.string(),
-  'description': schema.string.optional(),
-  'installments': schema.number(),
-  'payment_method_id': schema.string(),
-  'issuer_id': schema.string(),
-  'payer.email': schema.string({}, [rules.email()]),
-  'payer.identification.type': schema.string(),
-  'payer.identification.number': schema.number(),
+  /** Customer's id */
+  customer_id: schema.string(),
+  /** Card token */
+  token: schema.string(),
 })
 
 export const MercadoPagoCardUpdateSchema = schema.create({
-  'transaction_amount': schema.number(),
-  'token': schema.string(),
-  'description': schema.string.optional(),
-  'installments': schema.number(),
-  'payment_method_id': schema.string(),
-  'issuer_id': schema.string(),
-  'payer.email': schema.string({}, [rules.email()]),
-  'payer.identification.type': schema.string(),
-  'payer.identification.number': schema.number(),
+  id: schema.string(),
+  /** Customer's id */
+  customer_id: schema.string(),
+  /** Card token */
+  token: schema.string(),
 })
 
 export const MercadoPagoCardSearchSchema = schema.create({
-  'transaction_amount': schema.number(),
-  'token': schema.string(),
-  'description': schema.string.optional(),
-  'installments': schema.number(),
-  'payment_method_id': schema.string(),
-  'issuer_id': schema.string(),
-  'payer.email': schema.string({}, [rules.email()]),
-  'payer.identification.type': schema.string(),
-  'payer.identification.number': schema.number(),
+  customer_id: schema.string(),
+  id: schema.string(),
 })

@@ -9,7 +9,7 @@ import {
 } from 'mercadopago/resources/merchantOrders'
 
 class MercadoPagoMerchantOrderService {
-  async getMerchantOrderMP(
+  async get(
     id: string | number,
     configuration?: DefaultConfigurationOmitQs
   ): Promise<MerchantOrderGetResponse> {
@@ -17,11 +17,11 @@ class MercadoPagoMerchantOrderService {
       return await mercadopago.merchant_orders.get(id, configuration)
     } catch (error) {
       console.error(error)
-      throw new Error('Error to getMerchantOrderMP')
+      throw new Error('Error to get')
     }
   }
 
-  async createMerchantOrderMP(
+  async create(
     payload: CreateMerchantOrderPayload,
     configuration?: DefaultConfigurationOmitQs
   ): Promise<MerchantOrderCreateResponse> {
@@ -29,11 +29,11 @@ class MercadoPagoMerchantOrderService {
       return await mercadopago.merchant_orders.create(payload, configuration)
     } catch (error) {
       console.error(error)
-      throw new Error('Error to createMerchantOrderMP')
+      throw new Error('Error to create')
     }
   }
 
-  async updateMerchantOrderMP(
+  async update(
     payload: UpdateMerchantOrderPayload,
     configuration?: DefaultConfigurationOmitQs
   ): Promise<MerchantOrderUpdateResponse> {
@@ -41,7 +41,7 @@ class MercadoPagoMerchantOrderService {
       return await mercadopago.merchant_orders.update(payload, configuration)
     } catch (error) {
       console.error(error)
-      throw new Error('Error to updateMerchantOrderMP')
+      throw new Error('Error to update')
     }
   }
 }

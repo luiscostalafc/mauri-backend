@@ -20,7 +20,7 @@ class MercadoPagoCustomerService {
     }
   }
 
-  async findCustomerByIdMP(
+  async find(
     id: string,
     configuration?: DefaultConfigurationOmitQs
   ): Promise<CardGetResponse> {
@@ -28,7 +28,7 @@ class MercadoPagoCustomerService {
       return await mercadopago.customers.findById(id, configuration)
     } catch (error) {
       console.error(error)
-      throw new Error('Error to findCustomerByIdMP')
+      throw new Error('Error to find')
     }
   }
 
