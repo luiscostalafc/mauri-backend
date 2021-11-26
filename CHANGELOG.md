@@ -2,6 +2,32 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.2.0](https://github.com/EmersonBraun/mauri-backend/compare/v2.1.0...v2.2.0) (2021-11-26)
+
+
+### Features
+
+* add controllers and migrations of mercadopago ([80083f4](https://github.com/EmersonBraun/mauri-backend/commit/80083f41654b1f326d03bc70baca9621d29305c1))
+* add Procfile and database new test ([752b4d8](https://github.com/EmersonBraun/mauri-backend/commit/752b4d8b209122d10f838188e3a16ed345dd666f))
+* add validations ([bb35146](https://github.com/EmersonBraun/mauri-backend/commit/bb351467b01ff8b8a8633c84d3f8ac6c7f95cd6f))
+* new test deploy ([6e75776](https://github.com/EmersonBraun/mauri-backend/commit/6e757766a47ac02ac0a09bb8a99d7ec74a5c06d0))
+* start integration with mercadopago ([6f51d51](https://github.com/EmersonBraun/mauri-backend/commit/6f51d512b23a7e91abdce4284753fd71d93c6f6b))
+
+
+### Bug Fixes
+
+* add engines ([fc6faf9](https://github.com/EmersonBraun/mauri-backend/commit/fc6faf9016740cd17a15c1e08b0cd0b295021b39))
+* change adonisjs assembler to dependencies ([74c67fc](https://github.com/EmersonBraun/mauri-backend/commit/74c67fc28a4a7da06127fd4cf670b0fa840af7df))
+* change adonisjs dependencies ([b8c96cb](https://github.com/EmersonBraun/mauri-backend/commit/b8c96cbb315978da22ba82ffc2eeafebef5654da))
+* change adonisjs dependencies ([95aef80](https://github.com/EmersonBraun/mauri-backend/commit/95aef8077d90299c6f17c04da39c0fa1b729f291))
+* change adonisjs dependencies ([2128669](https://github.com/EmersonBraun/mauri-backend/commit/2128669fba1e9250ee15b88cdb6fc914c1e3032a))
+* change db seed ([ddff34f](https://github.com/EmersonBraun/mauri-backend/commit/ddff34fe818eee977d8d5668e640630eb25f2b0f))
+* new change of database ([beeebec](https://github.com/EmersonBraun/mauri-backend/commit/beeebec1115cbeb07aedc70bbcc9e6b680e3e1f8))
+* replace DB_CONNECTION to Env.get ([363da3a](https://github.com/EmersonBraun/mauri-backend/commit/363da3ad5ad35895386e0b92c4f3ea125f1bcb45))
+* replace DB_CONNECTION to Env.get ([e557665](https://github.com/EmersonBraun/mauri-backend/commit/e557665d68e42ad77da4f3834110933b36e1f53e))
+* solve dependences ([7e2d085](https://github.com/EmersonBraun/mauri-backend/commit/7e2d085d057c3fd935213c42a4af176485915224))
+* solve package lock ([d23cda2](https://github.com/EmersonBraun/mauri-backend/commit/d23cda2efb0065585a44c86c71642b11ab9835b6))
+
 ## [2.1.0](https://github.com/EmersonBraun/mauri-backend/compare/v2.0.0...v2.1.0) (2021-11-16)
 
 

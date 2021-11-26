@@ -1,6 +1,6 @@
 {
   "name": "backend",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "private": true,
   "scripts": {
     "start": "node ace serve --watch",
@@ -21,6 +21,7 @@
   "devDependencies": {
     "@types/faker": "^5.5.9",
     "@types/jsdom": "^16.2.13",
+    "@types/mercadopago": "^1.5.5",
     "@types/supertest": "^2.0.11",
     "adonis-preset-ts": "^2.1.0",
     "cross-blob": "^2.0.1",
@@ -52,6 +53,7 @@
     "aws-sdk": "^2.1029.0",
     "g": "^2.0.1",
     "luxon": "^1.28.0",
+    "mercadopago": "^1.5.9",
     "multer": "^1.4.3",
     "pg": "^8.7.1",
     "phc-argon2": "^1.1.2",

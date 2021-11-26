@@ -13,8 +13,13 @@
 import { Ignitor } from '@adonisjs/core/build/standalone'
 import 'reflect-metadata'
 import sourceMapSupport from 'source-map-support'
+import { MPBootstrap } from './app/Services/mercadopago'
 
 sourceMapSupport.install({ handleUncaughtExceptions: false })
 
-new Ignitor(__dirname).httpServer().start()
-console.log('🚀  Servidor rodando bicho!!! 🤩')
+new Ignitor(__dirname)
+  .httpServer()
+  .start()
+  .then(() => MPBootstrap())
+  .then(() => console.log('🚀  Servidor rodando bicho!!! 🤩'))
+  .catch((error) => console.error(error))
