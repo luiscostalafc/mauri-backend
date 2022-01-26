@@ -26,6 +26,7 @@ Route.get('/', async () => {
 Route.post('/login', 'AuthController.login')
 Route.post('/logout', 'AuthController.logout')
 Route.post('/forgot', 'ForgotPasswordController.store')
+Route.post('/change-password', 'ForgotPasswordController.ChangePassword')
 
 Route.group(() => {
   Route.post('addresses/search', 'AddressesController.search')
