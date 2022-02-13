@@ -79,6 +79,7 @@ Route.group(() => {
   Route.resource('merchant_order', 'MercadoPagoMerchantOrderController').apiOnly()
   Route.resource('payment', 'MercadoPagoPaymentController').apiOnly()
   Route.resource('preapproval', 'MercadoPagoPreapprovalController').apiOnly()
+  Route.post('createpreference', 'MercadoPagoPreferenceController.createPreference')
 }).prefix('/mercadopago')
 
 // .middleware('auth')
