@@ -5,7 +5,7 @@ import {
 import { DateTime } from 'luxon'
 import User from './User'
 
-export default class MercadoPago extends BaseModel {
+export default class MercadopagoTransactions extends BaseModel {
   @column({ isPrimary: true }) public id: number
   @column() public method: string
   @column() public user: User

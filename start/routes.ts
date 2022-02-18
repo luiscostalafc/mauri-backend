@@ -71,6 +71,8 @@ Route.group(() => {
   Route.post('user-groups/search', 'UserGroupsController.search')
   Route.resource('user-groups', 'UserGroupsController').apiOnly()
   Route.resource('reset', 'ResetPasswordController').apiOnly()
+  Route.get('mercadopago/preference-return', 'MercadoPagoPreferenceController.registerReturn')
+  Route.post('mercadopago/notification-payment', 'MercadoPagoPreferenceController.notifyPayment')
 }).prefix('/api')
 
 Route.group(() => {

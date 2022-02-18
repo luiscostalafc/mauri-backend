@@ -26,7 +26,15 @@ class MercadoPagoPreferencesService {
     configuration?: DefaultConfigurationOmitQs
   ): Promise<PreferenceCreateResponse> {
     try {
-      return await mercadopago.preferences.create(payload, configuration)
+      const testUrl = ''
+      return await mercadopago.preferences.create({...payload,
+      notification_url: `http://${process.env.HOST}:${process.env.PORT}/api/mercadopago/notification-payment`,
+      back_urls: {
+        failure: testUrl,
+        success: testUrl,
+        pending: testUrl
+      }}, configuration)
+
     } catch (error) {
       console.error(error)
       throw new Error('Error to createPreferenceMP')
