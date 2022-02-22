@@ -26,13 +26,18 @@ const DB_CONNECTION_STRING: any & DBConnection =
     Env.get('DATABASE_URL', '')
   )
 
-const {
-  DB_USER = null,
-  DB_PASSWORD = null,
-  DB_HOST = null,
-  DB_PORT = null,
-  DB_NAME = null,
-} = DB_CONNECTION_STRING?.groups
+// const {
+//   DB_USER = 'postgres',
+//   DB_PASSWORD = 'postgres',
+//   DB_HOST = 'localhost',
+//   DB_PORT = 5432,
+//   DB_NAME = 'ecommerce',
+// } = DB_CONNECTION_STRING?.groups
+const DB_USER = 'postgres';
+const DB_PASSWORD = 'postgres';
+const DB_HOST = 'localhost';
+const DB_PORT = 5432;
+const DB_NAME = 'ecommerce';
 
 const databaseConfig: DatabaseConfig & { orm: Partial<OrmConfig> } = {
   /*
@@ -111,7 +116,7 @@ const databaseConfig: DatabaseConfig & { orm: Partial<OrmConfig> } = {
         user: DB_USER ?? (Env.get('DB_USER', 'lucid') as string),
         password: DB_PASSWORD ?? (Env.get('DB_PASSWORD', 'lucid') as string),
         database: DB_NAME ?? (Env.get('DB_NAME', 'lucid') as string),
-        ssl: 'no-verify'
+        ssl: false
       },
       healthCheck: false,
     },

@@ -10,6 +10,7 @@ export default class OrdersController {
 
   async index ({ response }: HttpContextContract) {
     const register = await this.repository.all()
+    console.log('bati no index do orders')
     return response
       .status(register.statusCode)
       .json(register)

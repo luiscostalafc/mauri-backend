@@ -2,6 +2,7 @@
 import Logger from '@ioc:Adonis/Core/Logger'
 import OrderDetail from 'App/Models/OrderDetail'
 import { mountResponse } from 'App/Services/ResponseUtils'
+import Database from '@ioc:Adonis/Lucid/Database'
 import { all, create, createOrUpdate, find, findAndDelete, findAndUpdate, first } from '../Services/CRUD'
 
 class OrderDatailsRepository {
@@ -60,6 +61,16 @@ class OrderDatailsRepository {
   async findAndDelete (id: any) {
     return await findAndDelete(this.model, id)
   }
+
+  async getOrdersWithProducts(id: number): Promise<any>{
+    const result =  await Database.rawQuery(`select * from order_details d
+    left join orders o on d.order_id = o.id
+    left join users u on u.id = o.user_id
+    left join order_has_products ohp on ohp.order_id = o.id
+    left join products p on ohp.product_id = p.id where o.id = '${id}'`)
+
+    return result.rows
+}
 }
 
 export default new OrderDatailsRepository()

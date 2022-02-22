@@ -43,6 +43,7 @@ Route.group(() => {
   Route.post('orders/search', 'OrdersController.search')
   Route.resource('orders', 'OrdersController').apiOnly()
   Route.post('order-details/search', 'OrderDetailsController.search')
+  Route.get('order-details/search/:id','OrderDetailsController.getDetailsById' )
   Route.resource('order-details', 'OrderDetailsController').apiOnly()
   Route.post('order-statuses/search', 'OrderStatusesController.search')
   Route.resource('order-statuses', 'OrderStatusesController').apiOnly()

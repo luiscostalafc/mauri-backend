@@ -73,4 +73,14 @@ export default class OrderDetailsController {
       .status(register.statusCode)
       .json(register)
   }
+
+  async getDetailsById({request,response}:HttpContextContract){
+    const {id} = request.params()
+    const res = await this.repository.getOrdersWithProducts(id)
+    if(res){
+      return response.status(200).json(res)
+    }
+
+    return response.status(400)
+  }
 }

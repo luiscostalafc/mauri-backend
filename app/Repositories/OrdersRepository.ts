@@ -30,12 +30,14 @@ class OrdersRepository {
     try {
       data = await Database
         .rawQuery(`
-          SELECT *
+          SELECT *, orders.id as order_result_id
           FROM orders 
-          RIGHT JOIN "users" on "users"."id" = "orders"."user_id" 
-          RIGHT JOIN "order_statuses" on "order_statuses"."id" = "orders"."order_status_id" 
-          RIGHT JOIN "deliveries" on "deliveries"."id" = "orders"."delivery_id"
+          LEFT JOIN "users" on "users"."id" = "orders"."user_id" 
+          LEFT JOIN "order_statuses" on "order_statuses"."id" = "orders"."order_status_id" 
+          LEFT JOIN "deliveries" on "deliveries"."id" = "orders"."delivery_id"
           `)
+
+          console.log(data.rows)
     } catch (error) {
       contentError = error
     }
