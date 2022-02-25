@@ -16,7 +16,8 @@
     "release:major": "standard-version --release-as major",
     "release:minor": "standard-version --release-as minor",
     "release:patch": "standard-version --release-as patch",
-    "test": "node -r @adonisjs/assembler/build/register japaFile.ts"
+    "test": "node -r @adonisjs/assembler/build/register japaFile.ts",
+    "debug": "node ace serve --dev --debug --watch"
   },
   "devDependencies": {
     "@types/faker": "^5.5.9",
@@ -50,6 +51,7 @@
     "@adonisjs/lucid": "^10.0.0",
     "@adonisjs/mail": "^7.2.4",
     "@adonisjs/repl": "^1.1.6",
+    "@adonisjs/view": "^6.1.1",
     "aws-sdk": "^2.1029.0",
     "g": "^2.0.1",
     "luxon": "^1.28.0",
