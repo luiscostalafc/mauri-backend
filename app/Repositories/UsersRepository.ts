@@ -2,7 +2,15 @@
 import Logger from '@ioc:Adonis/Core/Logger'
 import User from 'App/Models/User'
 import { mountResponse } from 'App/Services/ResponseUtils'
-import { all, create, createOrUpdate, find, findAndDelete, findAndUpdate, first } from '../Services/CRUD'
+import {
+  all,
+  create,
+  createOrUpdate,
+  find,
+  findAndDelete,
+  findAndUpdate,
+  first,
+} from '../Services/CRUD'
 
 class UsersRepository {
   protected model: any
@@ -12,31 +20,31 @@ class UsersRepository {
   protected statusCode = 400
   protected options = 0
 
-  public logError (func, error) {
+  public logError(func, error) {
     Logger.warn(`Repository ${func} Error: ${error}`)
   }
 
-  constructor () {
+  constructor() {
     this.model = User
   }
 
-  castValues (data) {
+  castValues(data) {
     data.is_provider = Boolean(data?.is_provider)
     data.inactive = Boolean(data?.inactive)
 
     return data
   }
 
-  async first () {
+  async first() {
     return await first(this.model)
   }
 
-  async search (query) {
+  async search(query) {
     let contentError = ''
     let data: any
-    try{
+    try {
       data = await this.model.query().where(query)
-    } catch(error) {
+    } catch (error) {
       console.log(error)
       contentError = error
     }
@@ -44,15 +52,15 @@ class UsersRepository {
     return mountResponse(data, contentError, 'load')
   }
 
-  async all () {
+  async all() {
     return await all(this.model)
   }
 
-  async find (id) {
+  async find(id) {
     return await find(this.model, id)
   }
 
-  async findByEmail (email: string) {
+  async findByEmail(email: string) {
     const data = await User.query()
       // .preload('address')
       // .preload('card')
@@ -67,23 +75,27 @@ class UsersRepository {
     return mountResponse(retunData, '', 'load')
   }
 
-  async create (data: any) {
+  async create(data: any) {
     data = this.castValues(data)
     return await create(this.model, data)
   }
 
-  async createOrUpdate (register: any, data: any) {
+  async createOrUpdate(register: any, data: any) {
     data = this.castValues(data)
     return await createOrUpdate(this.model, register, data)
   }
 
-  async findAndUpdate (id: any, data: any) {
+  async findAndUpdate(id: any, data: any) {
     data = this.castValues(data)
     return await findAndUpdate(this.model, id, data)
   }
 
-  async findAndDelete (id: any) {
+  async findAndDelete(id: any) {
     return await findAndDelete(this.model, id)
+  }
+
+  async updatePassword(email, newPassword) {
+    return await this.model.query().where({ email }).update({ password: newPassword })
   }
 }
 
