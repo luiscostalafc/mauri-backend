@@ -140,7 +140,7 @@ class ProductsRepository {
     return Object.values(object).every(x => x === null || x === '')
   }
 
-  async firstOrCreateGroup ({ group }: Group) {
+  async firstOrCreateGroup (group: string) {
     try {
       const res = await Group.firstOrCreate({group},{group})
       return res.serialize().id
@@ -149,9 +149,9 @@ class ProductsRepository {
       // console.log(group)
     }
   }
-  async firstOrCreateSubgroup ({ subgroup }: Subgroup) {
+  async firstOrCreateSubgroup (subgroup: string) {
     try {
-      const res = await Subgroup.firstOrCreate({subgroup},{subgroup})
+      const res = await Subgroup.create({subgroup},{subgroup})
       return res.serialize().id
     } catch (error) {
       console.log(error)
@@ -159,9 +159,8 @@ class ProductsRepository {
     }
   }
   async insertProduct (product: Product, groupId: number, subgroupId: number) {
-    const { description } = product
     try {
-      const res = await Product.firstOrCreate({ description },{...product, groupId, subgroupId})
+      const res = await Product.create({...product, groupId, subgroupId})
       return res.serialize().id
     } catch (error) {
       console.log(error)
@@ -176,7 +175,7 @@ class ProductsRepository {
     }
     for (const synonym of synonyms) {
       try {
-        const res = await Synonym.firstOrCreate({synonym}, {
+        const res = await Synonym.create({
           synonym,
           productId,
         })
@@ -194,17 +193,17 @@ class ProductsRepository {
     const returnData:any = []
     const excelData:Excel = Object.entries(data)
 
-    for (const d of excelData) {
-      const { product, group, subgroup, synonyms } = d[1]
-      if (!this.verifyIfIsNullLine(product)) {
+     for (const d of excelData) {
+       const { product, group, subgroup, synonyms } = d[1]
+       if (!this.verifyIfIsNullLine(product) && group) {
         const groupId:any = await this.firstOrCreateGroup(group)
         const subgroupId = await this.firstOrCreateSubgroup(subgroup)
         const productId = await this.insertProduct(product, groupId, subgroupId)
         const synonymsIds = await this.insertSynonyms(synonyms, productId)
 
-        returnData.push({ groupId, subgroupId, productId, synonymsIds })
-      }
-    }
+         returnData.push({ groupId, subgroupId, productId, synonymsIds })
+       }
+     }
 
     return mountResponse(returnData, contentError, 'load')
   }
