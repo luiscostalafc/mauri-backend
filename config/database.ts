@@ -111,7 +111,7 @@ const databaseConfig: DatabaseConfig & { orm: Partial<OrmConfig> } = {
         user: DB_USER ?? (Env.get('DB_USER', 'lucid') as string),
         password: DB_PASSWORD ?? (Env.get('DB_PASSWORD', 'lucid') as string),
         database: DB_NAME ?? (Env.get('DB_NAME', 'lucid') as string),
-        ssl: 'no-verify'
+        ssl: Env.get('DB_HOST') ? true : false
       },
       healthCheck: false,
     },

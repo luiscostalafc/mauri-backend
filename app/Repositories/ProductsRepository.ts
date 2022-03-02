@@ -151,7 +151,7 @@ class ProductsRepository {
   }
   async firstOrCreateSubgroup (subgroup: string) {
     try {
-      const res = await Subgroup.create({subgroup},{subgroup})
+      const res = await Subgroup.create({subgroup},{subgroup} as any)
       return res.serialize().id
     } catch (error) {
       console.log(error)
@@ -196,8 +196,8 @@ class ProductsRepository {
      for (const d of excelData) {
        const { product, group, subgroup, synonyms } = d[1]
        if (!this.verifyIfIsNullLine(product) && group) {
-        const groupId:any = await this.firstOrCreateGroup(group)
-        const subgroupId = await this.firstOrCreateSubgroup(subgroup)
+        const groupId:any = await this.firstOrCreateGroup(group as any)
+        const subgroupId = await this.firstOrCreateSubgroup(subgroup as any)
         const productId = await this.insertProduct(product, groupId, subgroupId)
         const synonymsIds = await this.insertSynonyms(synonyms, productId)
 
