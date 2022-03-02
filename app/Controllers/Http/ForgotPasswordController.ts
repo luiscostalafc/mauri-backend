@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/explicit-member-accessibility */
 import Env from '@ioc:Adonis/Core/Env'
+import Hash from '@ioc:Adonis/Core/Hash'
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import UsersRepository from 'App/Repositories/UsersRepository'
-import Hash from '@ioc:Adonis/Core/Hash'
 import { sendResetPasswordMail } from 'App/Services/MailService'
 import { validationError } from 'App/Services/ResponseUtils'
 import { ForgotPasswordSchema } from 'App/Validators'

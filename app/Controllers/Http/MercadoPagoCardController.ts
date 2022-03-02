@@ -23,8 +23,8 @@ export default class MercadoPagoCardController {
       return response.status(422).json(validationError(error))
     }
 
-    const data = request.all() as typeof MercadoPagoCardCreateSchema
-    const res = await this.service.create(data)
+    const data = request.all()
+    const res = await this.service.create(data as any)
     
     const user = auth.user
     const register = await this.repository.create({
@@ -43,8 +43,8 @@ export default class MercadoPagoCardController {
       return response.status(422).json(validationError(error))
     }
 
-    const data = request.all() as typeof MercadoPagoCardSearchSchema
-    const res = await this.service.find(data)
+    const data = request.all()
+    const res = await this.service.find(data as any, data.id)
     
     const user = auth.user
     const register = await this.repository.create({
