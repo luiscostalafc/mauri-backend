@@ -1,7 +1,7 @@
 import Database from '@ioc:Adonis/Lucid/Database'
+import { fakeStockType } from 'Database/factories/StockTypeFactory'
 import test from 'japa'
 import supertest from 'supertest'
-import { fakeStockOperation } from '../../database/factories'
 import { BASE_URL, responseData } from '../utils'
 
 const MODULE = '/api/stock-types'
@@ -29,7 +29,7 @@ test.group('StockTypes', (group) => {
   test('POST ensure create', async (assert) => {
     const { text } = await supertest(BASE_URL)
       .post(MODULE)
-      .send(await fakeStockOperation())
+      .send(await fakeStockType())
       .expect('Content-Type', /json/)
       .expect(201)
 
@@ -44,21 +44,11 @@ test.group('StockTypes', (group) => {
 
     assert.isNotEmpty(text)
   })
-  test('POST ensure search', async (assert) => {
-
-    const { text } = await supertest(BASE_URL)
-      .post(`${MODULE}/search`)
-      .send({ id: 1 })
-      .expect('Content-Type', /json/)
-      .expect(200)
-
-    assert.isNotEmpty(text)
-  })
   test('PUT ensure update', async (assert) => {
 
     const { text } = await supertest(BASE_URL)
       .put(`${MODULE}/1`)
-      .send(await fakeStockOperation())
+      .send(await fakeStockType())
       .expect('Content-Type', /json/)
       .expect(200)
 
