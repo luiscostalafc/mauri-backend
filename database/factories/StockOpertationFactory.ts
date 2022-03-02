@@ -25,7 +25,7 @@ export async function randomStockOperationId () {
 
 export const fakeStockOperation = async () => ({
   quantity: faker.datatype.number(50),
-  unit_value: faker.datatype.number(50),
+  // unit_value: faker.datatype.number(50),
   comment: faker.lorem.words(5),
   operation_id: await randomOperationId(),
   product_id: await randomProductId(),
